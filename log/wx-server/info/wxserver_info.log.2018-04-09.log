@@ -1,0 +1,39 @@
+2018-04-09 16:18:24.622 [main] INFO  com.example.wx.MicroWxServerApplication - Starting MicroWxServerApplication on gaochunmei-PC with PID 11924 (E:\06MyWork\2018\micro-wx-server\target\classes started by Administrator in E:\06MyWork\2018\micro-wx-server)
+2018-04-09 16:18:24.624 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:18:26.093 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 2.508 seconds (JVM running for 4.086)
+2018-04-09 16:22:09.076 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:22:17.503 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 11.756 seconds (JVM running for 13.552)
+2018-04-09 16:22:46.965 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:22:55.298 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 11.765 seconds (JVM running for 13.211)
+2018-04-09 16:23:21.780 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:24:03.031 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:24:05.048 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:26:47.725 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:26:49.444 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:26:59.120 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 14.967 seconds (JVM running for 16.627)
+2018-04-09 16:28:15.036 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:28:16.976 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:28:27.023 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 15.93 seconds (JVM running for 17.518)
+2018-04-09 16:34:03.531 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:34:05.787 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:34:16.419 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 16.398 seconds (JVM running for 17.956)
+2018-04-09 16:36:03.381 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:36:05.458 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:36:15.857 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 16.258 seconds (JVM running for 18.033)
+2018-04-09 16:37:16.284 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:37:18.255 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:37:28.181 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 15.348 seconds (JVM running for 16.936)
+2018-04-09 16:38:44.398 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:38:46.598 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:38:57.017 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 16.249 seconds (JVM running for 17.793)
+2018-04-09 16:45:32.704 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 16:45:34.704 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 16:45:46.049 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 17.592 seconds (JVM running for 19.146)
+2018-04-09 17:27:40.138 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 17:27:42.282 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 17:27:53.489 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 16.831 seconds (JVM running for 18.418)
+2018-04-09 17:28:55.343 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 17:28:57.747 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 17:30:06.764 [main] INFO  com.example.wx.MicroWxServerApplication - The following profiles are active: test
+2018-04-09 17:30:09.258 [main] INFO  c.e.wx.config.datasource.DynamicDataSourceRegister - Dynamic DataSource Registry
+2018-04-09 17:30:20.173 [main] INFO  com.example.wx.MicroWxServerApplication - Started MicroWxServerApplication in 16.836 seconds (JVM running for 18.312)

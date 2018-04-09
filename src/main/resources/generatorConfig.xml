@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator.properties"></properties>
+
+    <classPathEntry location="${jdbc.driverLocation}"></classPathEntry>
+
+    <context id="default" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"></property>
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+
+        <jdbcConnection
+            driverClass="${jdbc.driverClass}"
+            connectionURL="${jdbc.connectionURL}"
+            userId="${jdbc.userId}"
+            password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"></property>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.example.wx.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"></property>
+            <property name="constructorBased" value="true"></property>
+            <property name="trimStrings" value="true"></property>
+            <property name="immutable" value="false"></property>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"></property>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.example.wx.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"></property>
+        </javaClientGenerator>
+
+
+        <table tableName="Appeal" domainObjectName="Appeal">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="InAndOutSchool" domainObjectName="InAndOutSchool">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="Recharge" domainObjectName="Recharge">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="Spend" domainObjectName="Spend">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="Student" domainObjectName="Student">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <!--<table tableName="StudentRelation" domainObjectName="StudentRelation">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <table tableName="SmsInfo" domainObjectName="SmsInfo">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

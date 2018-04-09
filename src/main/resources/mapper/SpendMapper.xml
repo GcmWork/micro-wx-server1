@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wx.dao.SpendMapper">
+  <resultMap id="BaseResultMap" type="com.example.wx.model.Spend">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="userbh" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="spendtype" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="spendtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="place" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="endpoint" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="beforeamount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="afteramount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="addfield" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="isdel" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, userbh, spendtype, spendtime, place, endpoint, beforeamount, amount, afteramount, 
+    addfield, createtime, isdel
+  </sql>
+  <select id="selectByExample" parameterType="com.example.wx.model.SpendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Spend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Spend
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from Spend
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.wx.model.SpendExample">
+    delete from Spend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.wx.model.Spend">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Spend (userbh, spendtype, spendtime, 
+      place, endpoint, beforeamount, 
+      amount, afteramount, addfield, 
+      createtime, isdel)
+    values (#{userbh,jdbcType=VARCHAR}, #{spendtype,jdbcType=VARCHAR}, #{spendtime,jdbcType=TIMESTAMP}, 
+      #{place,jdbcType=VARCHAR}, #{endpoint,jdbcType=VARCHAR}, #{beforeamount,jdbcType=DECIMAL}, 
+      #{amount,jdbcType=DECIMAL}, #{afteramount,jdbcType=DECIMAL}, #{addfield,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.wx.model.Spend">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Spend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userbh != null">
+        userbh,
+      </if>
+      <if test="spendtype != null">
+        spendtype,
+      </if>
+      <if test="spendtime != null">
+        spendtime,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="endpoint != null">
+        endpoint,
+      </if>
+      <if test="beforeamount != null">
+        beforeamount,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="afteramount != null">
+        afteramount,
+      </if>
+      <if test="addfield != null">
+        addfield,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userbh != null">
+        #{userbh,jdbcType=VARCHAR},
+      </if>
+      <if test="spendtype != null">
+        #{spendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="spendtime != null">
+        #{spendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="endpoint != null">
+        #{endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeamount != null">
+        #{beforeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="afteramount != null">
+        #{afteramount,jdbcType=DECIMAL},
+      </if>
+      <if test="addfield != null">
+        #{addfield,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.wx.model.SpendExample" resultType="java.lang.Long">
+    select count(*) from Spend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Spend
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userbh != null">
+        userbh = #{record.userbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spendtype != null">
+        spendtype = #{record.spendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spendtime != null">
+        spendtime = #{record.spendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.place != null">
+        place = #{record.place,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endpoint != null">
+        endpoint = #{record.endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeamount != null">
+        beforeamount = #{record.beforeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.afteramount != null">
+        afteramount = #{record.afteramount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addfield != null">
+        addfield = #{record.addfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdel != null">
+        isdel = #{record.isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Spend
+    set id = #{record.id,jdbcType=BIGINT},
+      userbh = #{record.userbh,jdbcType=VARCHAR},
+      spendtype = #{record.spendtype,jdbcType=VARCHAR},
+      spendtime = #{record.spendtime,jdbcType=TIMESTAMP},
+      place = #{record.place,jdbcType=VARCHAR},
+      endpoint = #{record.endpoint,jdbcType=VARCHAR},
+      beforeamount = #{record.beforeamount,jdbcType=DECIMAL},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      afteramount = #{record.afteramount,jdbcType=DECIMAL},
+      addfield = #{record.addfield,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      isdel = #{record.isdel,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.wx.model.Spend">
+    update Spend
+    <set>
+      <if test="userbh != null">
+        userbh = #{userbh,jdbcType=VARCHAR},
+      </if>
+      <if test="spendtype != null">
+        spendtype = #{spendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="spendtime != null">
+        spendtime = #{spendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="endpoint != null">
+        endpoint = #{endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeamount != null">
+        beforeamount = #{beforeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="afteramount != null">
+        afteramount = #{afteramount,jdbcType=DECIMAL},
+      </if>
+      <if test="addfield != null">
+        addfield = #{addfield,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.wx.model.Spend">
+    update Spend
+    set userbh = #{userbh,jdbcType=VARCHAR},
+      spendtype = #{spendtype,jdbcType=VARCHAR},
+      spendtime = #{spendtime,jdbcType=TIMESTAMP},
+      place = #{place,jdbcType=VARCHAR},
+      endpoint = #{endpoint,jdbcType=VARCHAR},
+      beforeamount = #{beforeamount,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      afteramount = #{afteramount,jdbcType=DECIMAL},
+      addfield = #{addfield,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

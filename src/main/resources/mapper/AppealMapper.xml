@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wx.dao.AppealMapper">
+  <resultMap id="BaseResultMap" type="com.example.wx.model.Appeal">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="relationid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="poarentname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="relation" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="studentname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="appealtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="appealtype" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="oldmobilephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="newmobilephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="appealresult" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="rechargetime1" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="amount1" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="rechargetime2" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="amount2" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="rechargetime3" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="amount3" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="addfield" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="isdel" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, relationid, openid, poarentname, relation, studentname, appealtime, appealtype, 
+    oldmobilephone, newmobilephone, appealresult, rechargetime1, amount1, rechargetime2, 
+    amount2, rechargetime3, amount3, addfield, createtime, isdel
+  </sql>
+  <select id="selectByExample" parameterType="com.example.wx.model.AppealExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Appeal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Appeal
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from Appeal
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.wx.model.AppealExample">
+    delete from Appeal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.wx.model.Appeal">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Appeal (relationid, openid, poarentname, 
+      relation, studentname, appealtime, 
+      appealtype, oldmobilephone, newmobilephone, 
+      appealresult, rechargetime1, amount1, 
+      rechargetime2, amount2, rechargetime3, 
+      amount3, addfield, createtime, 
+      isdel)
+    values (#{relationid,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{poarentname,jdbcType=VARCHAR}, 
+      #{relation,jdbcType=VARCHAR}, #{studentname,jdbcType=VARCHAR}, #{appealtime,jdbcType=TIMESTAMP}, 
+      #{appealtype,jdbcType=INTEGER}, #{oldmobilephone,jdbcType=VARCHAR}, #{newmobilephone,jdbcType=VARCHAR}, 
+      #{appealresult,jdbcType=VARCHAR}, #{rechargetime1,jdbcType=TIMESTAMP}, #{amount1,jdbcType=DECIMAL}, 
+      #{rechargetime2,jdbcType=TIMESTAMP}, #{amount2,jdbcType=DECIMAL}, #{rechargetime3,jdbcType=TIMESTAMP}, 
+      #{amount3,jdbcType=DECIMAL}, #{addfield,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.wx.model.Appeal">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Appeal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relationid != null">
+        relationid,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="poarentname != null">
+        poarentname,
+      </if>
+      <if test="relation != null">
+        relation,
+      </if>
+      <if test="studentname != null">
+        studentname,
+      </if>
+      <if test="appealtime != null">
+        appealtime,
+      </if>
+      <if test="appealtype != null">
+        appealtype,
+      </if>
+      <if test="oldmobilephone != null">
+        oldmobilephone,
+      </if>
+      <if test="newmobilephone != null">
+        newmobilephone,
+      </if>
+      <if test="appealresult != null">
+        appealresult,
+      </if>
+      <if test="rechargetime1 != null">
+        rechargetime1,
+      </if>
+      <if test="amount1 != null">
+        amount1,
+      </if>
+      <if test="rechargetime2 != null">
+        rechargetime2,
+      </if>
+      <if test="amount2 != null">
+        amount2,
+      </if>
+      <if test="rechargetime3 != null">
+        rechargetime3,
+      </if>
+      <if test="amount3 != null">
+        amount3,
+      </if>
+      <if test="addfield != null">
+        addfield,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relationid != null">
+        #{relationid,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="poarentname != null">
+        #{poarentname,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null">
+        #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null">
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="appealtime != null">
+        #{appealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appealtype != null">
+        #{appealtype,jdbcType=INTEGER},
+      </if>
+      <if test="oldmobilephone != null">
+        #{oldmobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="newmobilephone != null">
+        #{newmobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="appealresult != null">
+        #{appealresult,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargetime1 != null">
+        #{rechargetime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount1 != null">
+        #{amount1,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargetime2 != null">
+        #{rechargetime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount2 != null">
+        #{amount2,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargetime3 != null">
+        #{rechargetime3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount3 != null">
+        #{amount3,jdbcType=DECIMAL},
+      </if>
+      <if test="addfield != null">
+        #{addfield,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.wx.model.AppealExample" resultType="java.lang.Long">
+    select count(*) from Appeal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Appeal
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.relationid != null">
+        relationid = #{record.relationid,jdbcType=BIGINT},
+      </if>
+      <if test="record.openid != null">
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poarentname != null">
+        poarentname = #{record.poarentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation != null">
+        relation = #{record.relation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentname != null">
+        studentname = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appealtime != null">
+        appealtime = #{record.appealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.appealtype != null">
+        appealtype = #{record.appealtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldmobilephone != null">
+        oldmobilephone = #{record.oldmobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newmobilephone != null">
+        newmobilephone = #{record.newmobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appealresult != null">
+        appealresult = #{record.appealresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargetime1 != null">
+        rechargetime1 = #{record.rechargetime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amount1 != null">
+        amount1 = #{record.amount1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rechargetime2 != null">
+        rechargetime2 = #{record.rechargetime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amount2 != null">
+        amount2 = #{record.amount2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rechargetime3 != null">
+        rechargetime3 = #{record.rechargetime3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amount3 != null">
+        amount3 = #{record.amount3,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addfield != null">
+        addfield = #{record.addfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdel != null">
+        isdel = #{record.isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Appeal
+    set id = #{record.id,jdbcType=BIGINT},
+      relationid = #{record.relationid,jdbcType=BIGINT},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      poarentname = #{record.poarentname,jdbcType=VARCHAR},
+      relation = #{record.relation,jdbcType=VARCHAR},
+      studentname = #{record.studentname,jdbcType=VARCHAR},
+      appealtime = #{record.appealtime,jdbcType=TIMESTAMP},
+      appealtype = #{record.appealtype,jdbcType=INTEGER},
+      oldmobilephone = #{record.oldmobilephone,jdbcType=VARCHAR},
+      newmobilephone = #{record.newmobilephone,jdbcType=VARCHAR},
+      appealresult = #{record.appealresult,jdbcType=VARCHAR},
+      rechargetime1 = #{record.rechargetime1,jdbcType=TIMESTAMP},
+      amount1 = #{record.amount1,jdbcType=DECIMAL},
+      rechargetime2 = #{record.rechargetime2,jdbcType=TIMESTAMP},
+      amount2 = #{record.amount2,jdbcType=DECIMAL},
+      rechargetime3 = #{record.rechargetime3,jdbcType=TIMESTAMP},
+      amount3 = #{record.amount3,jdbcType=DECIMAL},
+      addfield = #{record.addfield,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      isdel = #{record.isdel,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.wx.model.Appeal">
+    update Appeal
+    <set>
+      <if test="relationid != null">
+        relationid = #{relationid,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="poarentname != null">
+        poarentname = #{poarentname,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null">
+        relation = #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null">
+        studentname = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="appealtime != null">
+        appealtime = #{appealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appealtype != null">
+        appealtype = #{appealtype,jdbcType=INTEGER},
+      </if>
+      <if test="oldmobilephone != null">
+        oldmobilephone = #{oldmobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="newmobilephone != null">
+        newmobilephone = #{newmobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="appealresult != null">
+        appealresult = #{appealresult,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargetime1 != null">
+        rechargetime1 = #{rechargetime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount1 != null">
+        amount1 = #{amount1,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargetime2 != null">
+        rechargetime2 = #{rechargetime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount2 != null">
+        amount2 = #{amount2,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargetime3 != null">
+        rechargetime3 = #{rechargetime3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount3 != null">
+        amount3 = #{amount3,jdbcType=DECIMAL},
+      </if>
+      <if test="addfield != null">
+        addfield = #{addfield,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.wx.model.Appeal">
+    update Appeal
+    set relationid = #{relationid,jdbcType=BIGINT},
+      openid = #{openid,jdbcType=VARCHAR},
+      poarentname = #{poarentname,jdbcType=VARCHAR},
+      relation = #{relation,jdbcType=VARCHAR},
+      studentname = #{studentname,jdbcType=VARCHAR},
+      appealtime = #{appealtime,jdbcType=TIMESTAMP},
+      appealtype = #{appealtype,jdbcType=INTEGER},
+      oldmobilephone = #{oldmobilephone,jdbcType=VARCHAR},
+      newmobilephone = #{newmobilephone,jdbcType=VARCHAR},
+      appealresult = #{appealresult,jdbcType=VARCHAR},
+      rechargetime1 = #{rechargetime1,jdbcType=TIMESTAMP},
+      amount1 = #{amount1,jdbcType=DECIMAL},
+      rechargetime2 = #{rechargetime2,jdbcType=TIMESTAMP},
+      amount2 = #{amount2,jdbcType=DECIMAL},
+      rechargetime3 = #{rechargetime3,jdbcType=TIMESTAMP},
+      amount3 = #{amount3,jdbcType=DECIMAL},
+      addfield = #{addfield,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

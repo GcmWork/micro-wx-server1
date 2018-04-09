@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wx.dao.SmsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.wx.model.SmsInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="mobilephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sendtype" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="verificationcode" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="cutofftime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="isdel" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sendurl" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="parameter" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="jsonresult" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, mobilephone, sendtype, verificationcode, content, status, cutofftime, createtime, 
+    isdel, sendurl, parameter, jsonresult
+  </sql>
+  <select id="selectByExample" parameterType="com.example.wx.model.SmsInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SmsInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SmsInfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SmsInfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.wx.model.SmsInfoExample">
+    delete from SmsInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.wx.model.SmsInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into SmsInfo (mobilephone, sendtype, verificationcode, 
+      content, status, cutofftime, 
+      createtime, isdel, sendurl, 
+      parameter, jsonresult)
+    values (#{mobilephone,jdbcType=VARCHAR}, #{sendtype,jdbcType=INTEGER}, #{verificationcode,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{cutofftime,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER}, #{sendurl,jdbcType=VARCHAR}, 
+      #{parameter,jdbcType=VARCHAR}, #{jsonresult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.wx.model.SmsInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into SmsInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mobilephone != null">
+        mobilephone,
+      </if>
+      <if test="sendtype != null">
+        sendtype,
+      </if>
+      <if test="verificationcode != null">
+        verificationcode,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="cutofftime != null">
+        cutofftime,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+      <if test="sendurl != null">
+        sendurl,
+      </if>
+      <if test="parameter != null">
+        parameter,
+      </if>
+      <if test="jsonresult != null">
+        jsonresult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mobilephone != null">
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtype != null">
+        #{sendtype,jdbcType=INTEGER},
+      </if>
+      <if test="verificationcode != null">
+        #{verificationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cutofftime != null">
+        #{cutofftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="sendurl != null">
+        #{sendurl,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="jsonresult != null">
+        #{jsonresult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.wx.model.SmsInfoExample" resultType="java.lang.Long">
+    select count(*) from SmsInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SmsInfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.mobilephone != null">
+        mobilephone = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendtype != null">
+        sendtype = #{record.sendtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.verificationcode != null">
+        verificationcode = #{record.verificationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.cutofftime != null">
+        cutofftime = #{record.cutofftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdel != null">
+        isdel = #{record.isdel,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendurl != null">
+        sendurl = #{record.sendurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameter != null">
+        parameter = #{record.parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jsonresult != null">
+        jsonresult = #{record.jsonresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SmsInfo
+    set id = #{record.id,jdbcType=BIGINT},
+      mobilephone = #{record.mobilephone,jdbcType=VARCHAR},
+      sendtype = #{record.sendtype,jdbcType=INTEGER},
+      verificationcode = #{record.verificationcode,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      cutofftime = #{record.cutofftime,jdbcType=TIMESTAMP},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      isdel = #{record.isdel,jdbcType=INTEGER},
+      sendurl = #{record.sendurl,jdbcType=VARCHAR},
+      parameter = #{record.parameter,jdbcType=VARCHAR},
+      jsonresult = #{record.jsonresult,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.wx.model.SmsInfo">
+    update SmsInfo
+    <set>
+      <if test="mobilephone != null">
+        mobilephone = #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtype != null">
+        sendtype = #{sendtype,jdbcType=INTEGER},
+      </if>
+      <if test="verificationcode != null">
+        verificationcode = #{verificationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cutofftime != null">
+        cutofftime = #{cutofftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="sendurl != null">
+        sendurl = #{sendurl,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        parameter = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="jsonresult != null">
+        jsonresult = #{jsonresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.wx.model.SmsInfo">
+    update SmsInfo
+    set mobilephone = #{mobilephone,jdbcType=VARCHAR},
+      sendtype = #{sendtype,jdbcType=INTEGER},
+      verificationcode = #{verificationcode,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      cutofftime = #{cutofftime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      isdel = #{isdel,jdbcType=INTEGER},
+      sendurl = #{sendurl,jdbcType=VARCHAR},
+      parameter = #{parameter,jdbcType=VARCHAR},
+      jsonresult = #{jsonresult,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
