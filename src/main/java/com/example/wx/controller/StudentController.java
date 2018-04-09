@@ -8,6 +8,8 @@ import com.example.wx.domain.OutModel.ValidateStudentOut;
 import com.example.wx.model.Student;
 import com.example.wx.service.StudentRelationService;
 import com.example.wx.service.StudentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by Administrator on 2018/3/22.
  */
+
+@Api(description="学生信息相关接口")
 @RestController
 @RequestMapping("/student/")
 public class StudentController
@@ -25,7 +29,7 @@ public class StudentController
     StudentService studentService;
     @Autowired
     StudentRelationService studentRelationService;
-
+    @ApiOperation("校验是否有该学生")
     @RequestMapping(value = "/validatestudent",method = RequestMethod.POST)
     public BaseOutModel<ValidateStudentOut> validatestudent(@RequestBody ValidateStudentInput input)
     {
@@ -85,7 +89,7 @@ public class StudentController
         baseOutModel.setResult(1);
         return baseOutModel;
     }
-
+    @ApiOperation("获取学生信息")
     @RequestMapping(value = "/getstudentinfo",method = RequestMethod.POST)
     public BaseOutModel<GetStudentOut> getstudentinfo(@RequestBody GetStudentInfoInput input)
     {

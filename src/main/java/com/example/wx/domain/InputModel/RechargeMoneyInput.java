@@ -2,6 +2,8 @@ package com.example.wx.domain.InputModel;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Administrator on 2018/4/8.
  */
@@ -13,9 +15,9 @@ public class RechargeMoneyInput
     @ApiModelProperty("验证码")
     private String verificationcode="";
     @ApiModelProperty("微信号")
-    private String openid;
+    private String openid="";
     @ApiModelProperty("充值金额")
-    private Long rechargeamount;
+    private BigDecimal rechargeamount=BigDecimal.valueOf(0);
     @ApiModelProperty("充值状态 充值成功or充值失败")
     private String rechargestatus;
     @ApiModelProperty("学生关系id")
@@ -53,16 +55,6 @@ public class RechargeMoneyInput
         this.openid = openid;
     }
 
-    public Long getRechargeamount()
-    {
-        return rechargeamount;
-    }
-
-    public void setRechargeamount(Long rechargeamount)
-    {
-        this.rechargeamount = rechargeamount;
-    }
-
     public String getRechargestatus()
     {
         return rechargestatus;
@@ -91,5 +83,15 @@ public class RechargeMoneyInput
     public void setAddfield(String addfield)
     {
         this.addfield = addfield;
+    }
+
+    public BigDecimal getRechargeamount()
+    {
+        return rechargeamount;
+    }
+
+    public void setRechargeamount(BigDecimal rechargeamount)
+    {
+        this.rechargeamount = rechargeamount;
     }
 }

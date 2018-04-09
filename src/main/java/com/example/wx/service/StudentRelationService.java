@@ -73,4 +73,8 @@ public class StudentRelationService
     {
         return studentRelationMapper.updateByPrimaryKeySelective(studentRelation);
     }
+    public StudentRelation getStudetntRelationByID (long studentRelationid)
+    {
+        return studentRelationMapper.selectByPrimaryKey(studentRelationid);
+    }
 }

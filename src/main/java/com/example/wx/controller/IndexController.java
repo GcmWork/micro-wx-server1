@@ -4,6 +4,7 @@ import com.example.wx.domain.InputModel.TestInput;
 import com.example.wx.domain.OutModel.BaseOutModel;
 import com.example.wx.model.Student;
 import com.example.wx.service.StudentService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Administrator on 2018/3/14.
  */
+@Api(description="测试")
 @RestController
 @RequestMapping("/index/")
 public class IndexController

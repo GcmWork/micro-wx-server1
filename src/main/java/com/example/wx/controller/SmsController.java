@@ -9,6 +9,7 @@ import com.example.wx.domain.OutModel.SendSmsResult;
 import com.example.wx.model.SmsInfo;
 import com.example.wx.service.SmsInfoService;
 import com.example.wx.util.JacksonUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import java.util.*;
  * Created by Administrator on 2018/4/2.
  */
 
+@Api(description="短信相关接口")
 @RestController
 @RequestMapping("/sms/")
 public class SmsController

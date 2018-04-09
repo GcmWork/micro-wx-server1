@@ -12,6 +12,8 @@ import com.example.wx.model.StudentRelation;
 import com.example.wx.service.AppealService;
 import com.example.wx.service.StudentRelationService;
 import com.example.wx.service.StudentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/26.
  */
 
+@Api(description="申诉相关接口")
 @RestController
 @RequestMapping("/appeal/")
 public class AppealController
@@ -37,6 +40,7 @@ public class AppealController
     @Autowired
     StudentRelationService studentRelationService;
 
+    @ApiOperation("提交审核申请")
     @RequestMapping(value = "/submitappeal/", method = RequestMethod.POST)
     public BaseOutModel<SubmitAppealOut> submitappeal(@RequestBody SubmitAppealInput input)
     {
@@ -115,7 +119,7 @@ public class AppealController
 
         return baseOutModel;
     }
-
+    @ApiOperation("审核接口")
     @RequestMapping(value = "/appealresult/", method = RequestMethod.POST)
     public BaseOutModel appealresult(@RequestBody AppealResultInput input)
     {
@@ -141,7 +145,7 @@ public class AppealController
         }
         return baseOutModel;
     }
-
+    @ApiOperation("审核列表")
     @RequestMapping(value = "/appeallist/", method = RequestMethod.POST)
     public BaseOutModel<AppealListOut> appeallist(@RequestBody AppealListInput input)
     {

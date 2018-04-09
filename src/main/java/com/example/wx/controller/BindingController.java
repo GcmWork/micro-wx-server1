@@ -6,6 +6,8 @@ import com.example.wx.model.Student;
 import com.example.wx.model.StudentRelation;
 import com.example.wx.service.StudentRelationService;
 import com.example.wx.service.StudentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/26.
  */
 
+@Api(description="绑定相关接口")
 @RestController
 @RequestMapping("/binding/")
 public class BindingController
@@ -32,7 +35,7 @@ public class BindingController
     StudentController studentController;
     @Autowired
     SmsController smsController;
-
+    @ApiOperation("绑定接口")
     @RequestMapping(value = "biddingstudent", method = RequestMethod.POST)
     public BaseOutModel<BiddingStudentOut> biddingstudent(@RequestBody BiddingStudentInput input)
     {
@@ -75,6 +78,7 @@ public class BindingController
             return baseOutModel;
         }
     }
+    @ApiOperation("检测是否符合绑定条件")
     @RequestMapping(value = "checkisbidding", method = RequestMethod.POST)
     public BaseOutModel<CheckIsBiddingOut> checkisbidding(@RequestBody CheckIsBiddingInput input)
     {
@@ -109,6 +113,7 @@ public class BindingController
            return  baseOutModel;
        }
     }
+    @ApiOperation("绑定列表")
     @RequestMapping(value = "biddinglist", method = RequestMethod.POST)
     public BaseOutModel<BiddingListOut> biddinglist(@RequestBody BiddingListInput input)
     {
@@ -136,6 +141,7 @@ public class BindingController
         }
         return baseOutModel;
     }
+    @ApiOperation("绑定信息")
     @RequestMapping(value = "getbidinginfo", method = RequestMethod.POST)
     public BaseOutModel<GetBidingInfoOut> getbidinginfo(@RequestBody BiddingListInput input)
     {
@@ -161,6 +167,7 @@ public class BindingController
         }
         return baseOutModel;
     }
+    @ApiOperation("取消绑定")
     @RequestMapping(value = "unbind", method = RequestMethod.POST)
     public BaseOutModel unbind(@RequestBody UnbindInput input)
     {
@@ -195,6 +202,7 @@ public class BindingController
         }
         return baseOutModel;
     }
+    @ApiOperation("修改绑定手机号")
     @RequestMapping(value = "changebind", method = RequestMethod.POST)
     public BaseOutModel changebind(@RequestBody ChangeBindInput input)
     {
