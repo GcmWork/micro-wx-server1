@@ -20,13 +20,13 @@ public class SmsInfoService
     SmsInfoMapper smsInfoMapper;
     public Integer InsertSmsInfo(SmsInfo smsInfo)
     {
-       return smsInfoMapper.insert(smsInfo);
+       return smsInfoMapper.insertSelective(smsInfo);
     }
 
     public boolean ValidateMobile(ValidateMobileCodeInput input)
     {
         SmsInfoExample example=new SmsInfoExample();
-        example.createCriteria().andIsdelEqualTo(0).andSendtypeEqualTo(0).andMobilephoneEqualTo(input.getMobilephone()).andVerificationcodeEqualTo(input.getVerificationcode()).
+        example.createCriteria().andStatusEqualTo(1).andIsdelEqualTo(0).andSendtypeEqualTo(0).andMobilephoneEqualTo(input.getMobilephone()).andVerificationcodeEqualTo(input.getVerificationcode()).
                 andCreatetimeLessThan(new Date()).andCutofftimeGreaterThan(new Date());
        List<SmsInfo> list= smsInfoMapper.selectByExample(example);
        return list.size()>0;

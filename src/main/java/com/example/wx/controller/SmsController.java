@@ -36,7 +36,7 @@ public class SmsController
     SmsInfoService smsInfoService;
     @ApiOperation("发送短信")
     @RequestMapping(value = "/sendsms/",method = RequestMethod.POST)
-    public BaseOutModel<SendSmsResult> sendsms(@RequestBody SendSmsInput input)
+    public BaseOutModel sendsms(@RequestBody SendSmsInput input)
     {
         Convert convert=new Convert();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -45,7 +45,7 @@ public class SmsController
         smsInfo.setMobilephone(input.getMobile());
         smsInfo.setSendtype(input.getSmstype());
         SendSmsResult sendSmsResult = new SendSmsResult();
-        if (input.getSmstype() == 1)
+        if (input.getSmstype() .equals(0))
         {
             String code = "";
             Random rand = new Random();//生成随机数
@@ -63,16 +63,22 @@ public class SmsController
             Date Cutofftime = cal.getTime();
             smsInfo.setCutofftime(convert.StrToDate(format.format(Cutofftime)));
             sendSmsResult = sendVerificationcode(input.getMobile(), content,smsInfo);
+            smsInfo.setVerificationcode(code);
             if(sendSmsResult.getResult().equals(0))
             {
-                smsInfo.setStatus(0);
+                smsInfo.setStatus(1);
                 baseOutModel.setResult(1);
-                baseOutModel.setData(sendSmsResult);
+                if (input.getSmstype()==0)
+                {
+                    baseOutModel.setMessage(code);}else
+                {
+                    baseOutModel.setMessage("发送成功");
+                }
             }else
             {
-                smsInfo.setStatus(1);
+                smsInfo.setStatus(0);
                 baseOutModel.setResult(0);
-                baseOutModel.setData(sendSmsResult);
+                baseOutModel.setMessage(sendSmsResult.getErrmsg());
             }
 
         } else
