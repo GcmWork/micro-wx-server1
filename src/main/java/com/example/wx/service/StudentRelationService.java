@@ -35,13 +35,19 @@ public class StudentRelationService
         example.createCriteria().andIsdelEqualTo(0).andStatusEqualTo(1).andOpenidEqualTo(openid);
         return studentRelationMapper.selectByExample(example);
     }
-    public StudentRelation getRelationListByStudentidAndOpenid(String openid, long Studentid)
-    {
-        StudentRelationExample example=new StudentRelationExample();
-        example.createCriteria().andIsdelEqualTo(0).andStatusEqualTo(1).andOpenidEqualTo(openid).andStudentidEqualTo(Studentid);
-        List<StudentRelation> list= studentRelationMapper.selectByExample(example);
-        if (list.size() > 0)
-        {
+    public StudentRelation getRelationListByStudentidAndOpenid(String openid, long Studentid) {
+
+        StudentRelationExample example = new StudentRelationExample();
+        StudentRelationExample.Criteria criteria = example.createCriteria();
+        criteria = criteria.andIsdelEqualTo(0).andStatusEqualTo(1).andOpenidEqualTo(openid);
+        if (Studentid > 0) {
+            criteria.andStudentidEqualTo(Studentid);
+        } else {
+            example.setOrderByClause("createtime desc");
+        }
+        List<StudentRelation> list = studentRelationMapper.selectByExample(example);
+
+        if (list.size() > 0) {
             return list.get(0);
         }
         return null;

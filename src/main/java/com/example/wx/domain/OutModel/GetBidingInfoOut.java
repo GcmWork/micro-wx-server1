@@ -2,6 +2,8 @@ package com.example.wx.domain.OutModel;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Administrator on 2018/3/26.
  */
@@ -19,6 +21,9 @@ public class GetBidingInfoOut
     public String parentname="";
     @ApiModelProperty("手机号码")
     public String mobilephone="";
+    @ApiModelProperty("余额")
+
+    public BigDecimal balance=BigDecimal.valueOf(0);
 
     public String getName()
     {
@@ -78,5 +83,13 @@ public class GetBidingInfoOut
     public void setUserbh(String userbh)
     {
         this.userbh = userbh;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
