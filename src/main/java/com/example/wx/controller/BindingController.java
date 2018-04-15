@@ -46,6 +46,7 @@ public class BindingController
         validateStudentInput.setOpenid(input.getOpenid());
         validateStudentInput.setStudentclass(input.getStudentclass());
         validateStudentInput.setValidatetype(2);
+        validateStudentInput.setUserbh(input.getUserbh());
         BaseOutModel<ValidateStudentOut> validateOut = studentController.validatestudent(validateStudentInput);
         if (validateOut.getData().getCode() != "00")
         {
@@ -69,12 +70,16 @@ public class BindingController
             biddingStudentOut.setCode("00");
             biddingStudentOut.setReason("绑定成功");
             baseOutModel.setData(biddingStudentOut);
+            baseOutModel.setMessage("成功");
+            baseOutModel.setResult(1);
             return baseOutModel;
         } else
         {
             biddingStudentOut.setCode("05");
             biddingStudentOut.setReason("绑定失败");
             baseOutModel.setData(biddingStudentOut);
+            baseOutModel.setMessage("失败");
+            baseOutModel.setResult(0);
             return baseOutModel;
         }
     }
@@ -124,7 +129,7 @@ public class BindingController
         {
             for (StudentRelation item : list)
             {
-                Student student = studentService.GetStudentByID(item.getId());
+                Student student = studentService.GetStudentByID(item.getStudentid());
                 BiddingInfoOut biddingInfoOut = new BiddingInfoOut();
                 biddingInfoOut.setName(student.getName());
                 biddingInfoOut.setUsebh(student.getUsrbh());
