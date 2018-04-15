@@ -58,11 +58,11 @@
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
-        <!--<table tableName="StudentRelation" domainObjectName="StudentRelation">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <table tableName="SmsInfo" domainObjectName="SmsInfo">
+        <table tableName="StudentRelation" domainObjectName="StudentRelation">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
+        <!--<table tableName="SmsInfo" domainObjectName="SmsInfo">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>
