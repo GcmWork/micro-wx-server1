@@ -59,11 +59,11 @@ public class StudentRelationService
         }
         return null;
     }
-    public Long getCountByOpenidandStudentId(String openid,long Studentid)
+    public Integer getCountByOpenidandStudentId(String openid,long Studentid)
     {
         StudentRelationExample example=new StudentRelationExample();
         example.createCriteria().andIsdelEqualTo(0).andStatusEqualTo(1).andOpenidEqualTo(openid).andStudentidEqualTo(Studentid);
-        return studentRelationMapper.countByExample(example);
+        return studentRelationMapper.selectByExample(example).size();
     }
     public Integer InsertRelation (StudentRelation studentRelation)
     {

@@ -65,7 +65,7 @@ public class StudentController
         }
         //查找微信号已绑定几个学生
         long count2= studentRelationService.getCountByOpenid(input.getOpenid());
-        if(count1>=3)
+        if(count2>=3)
         {
             out.setReason("该微信号已绑定3个学生不可再绑定");
             out.setCode("03");
@@ -75,7 +75,7 @@ public class StudentController
         }
         //查找此手机号是否已绑定过此学生
         long count3= studentRelationService.getCountByOpenidandStudentId(input.getOpenid(),student.getId());
-        if(count1>=1)
+        if(count3>=1)
         {
             out.setReason("该微信已绑定过此学生不可重复绑定");
             out.setCode("04");
@@ -103,14 +103,7 @@ public class StudentController
        }
        GetStudentOut out=new GetStudentOut();
        out.setStudentclass(student.getStudentclass());
-       out.setAge(student.getAge());
-       out.setEtm(student.getEtm());
-       out.setId(student.getId());
-       out.setName(student.getName());
-       out.setOpenid(student.getOpenid());
-       out.setSex(student.getSex());
-       out.setStm(student.getStm());
-       out.setUsrbh(student.getUsrbh());
+       out.setName(student.getName().substring(0,student.getName().length()-1)+"*");
        baseOutModel.setMessage("查询成功");
        baseOutModel.setResult(1);
        baseOutModel.setData(out);
