@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2018/3/22.
  */
@@ -101,7 +103,14 @@ public class StudentController
            baseOutModel.setResult(0);
            return baseOutModel;
        }
-       GetStudentOut out=new GetStudentOut();
+        if(!(student.getStm().before(new Date())&&student.getEtm().after(new Date())))
+        {
+            baseOutModel.setMessage("学生不在有效期内");
+            baseOutModel.setResult(0);
+            return baseOutModel;
+        }
+
+            GetStudentOut out=new GetStudentOut();
        out.setStudentclass(student.getStudentclass());
        out.setName(student.getName().substring(0,student.getName().length()-1)+"*");
        baseOutModel.setMessage("查询成功");
