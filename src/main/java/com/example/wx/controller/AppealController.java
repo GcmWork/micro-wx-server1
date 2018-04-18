@@ -1,8 +1,10 @@
 package com.example.wx.controller;
 
+import com.example.wx.common.Convert;
 import com.example.wx.domain.InputModel.AppealListInput;
 import com.example.wx.domain.InputModel.AppealResultInput;
 import com.example.wx.domain.InputModel.SubmitAppealInput;
+import com.example.wx.domain.OutModel.AppealInfoOut;
 import com.example.wx.domain.OutModel.AppealListOut;
 import com.example.wx.domain.OutModel.BaseOutModel;
 import com.example.wx.domain.OutModel.SubmitAppealOut;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -119,7 +122,7 @@ public class AppealController
 
         return baseOutModel;
     }
-    @ApiOperation("审核接口")
+    @ApiOperation("审核操作接口")
     @RequestMapping(value = "/appealresult/", method = RequestMethod.POST)
     public BaseOutModel appealresult(@RequestBody AppealResultInput input)
     {
@@ -154,7 +157,22 @@ public class AppealController
         if(list.size()>0)
         {
             AppealListOut out=new AppealListOut();
-            out.setList(list);
+            List<AppealInfoOut> infoOuts=new ArrayList<>();
+            for (Appeal item:list)
+            {
+                AppealInfoOut appealInfoOut=new AppealInfoOut();
+                appealInfoOut.setId(item.getId());
+                appealInfoOut.setAmount1(item.getAmount1());
+                appealInfoOut.setAmount2(item.getAmount2());
+                appealInfoOut.setAmount3(item.getAmount3());
+                appealInfoOut.setAppealtime(item.getAppealtime());
+                appealInfoOut.setAppealresult(item.getAppealresult());
+                appealInfoOut.setRechargetime1(item.getRechargetime1());
+                appealInfoOut.setRechargetime2(item.getRechargetime2());
+                appealInfoOut.setRechargetime3(item.getRechargetime3());
+                infoOuts.add(appealInfoOut);
+            }
+            out.setList(infoOuts);
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
             baseOutModel.setMessage("查询成功");

@@ -10,6 +10,7 @@
       <arg column="relation" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="mobilephone" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="balance" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
       <arg column="nobindtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="nobindreason" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="addfield" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -76,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, openid, studentid, parentname, relation, mobilephone, status, nobindtime, nobindreason, 
-    addfield, createtime, isdel
+    id, openid, studentid, parentname, relation, mobilephone, status, balance, nobindtime, 
+    nobindreason, addfield, createtime, isdel
   </sql>
   <select id="selectByExample" parameterType="com.example.wx.model.StudentRelationExample" resultMap="BaseResultMap">
     select
@@ -115,12 +116,14 @@
     </selectKey>
     insert into StudentRelation (openid, studentid, parentname, 
       relation, mobilephone, status, 
-      nobindtime, nobindreason, addfield, 
-      createtime, isdel)
+      balance, nobindtime, nobindreason, 
+      addfield, createtime, isdel
+      )
     values (#{openid,jdbcType=VARCHAR}, #{studentid,jdbcType=BIGINT}, #{parentname,jdbcType=VARCHAR}, 
       #{relation,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{nobindtime,jdbcType=TIMESTAMP}, #{nobindreason,jdbcType=VARCHAR}, #{addfield,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER})
+      #{balance,jdbcType=DECIMAL}, #{nobindtime,jdbcType=TIMESTAMP}, #{nobindreason,jdbcType=VARCHAR}, 
+      #{addfield,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.wx.model.StudentRelation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -145,6 +148,9 @@
       </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="balance != null">
+        balance,
       </if>
       <if test="nobindtime != null">
         nobindtime,
@@ -180,6 +186,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
       </if>
       <if test="nobindtime != null">
         #{nobindtime,jdbcType=TIMESTAMP},
@@ -228,6 +237,9 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.balance != null">
+        balance = #{record.balance,jdbcType=DECIMAL},
+      </if>
       <if test="record.nobindtime != null">
         nobindtime = #{record.nobindtime,jdbcType=TIMESTAMP},
       </if>
@@ -257,6 +269,7 @@
       relation = #{record.relation,jdbcType=VARCHAR},
       mobilephone = #{record.mobilephone,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
+      balance = #{record.balance,jdbcType=DECIMAL},
       nobindtime = #{record.nobindtime,jdbcType=TIMESTAMP},
       nobindreason = #{record.nobindreason,jdbcType=VARCHAR},
       addfield = #{record.addfield,jdbcType=VARCHAR},
@@ -287,6 +300,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
       <if test="nobindtime != null">
         nobindtime = #{nobindtime,jdbcType=TIMESTAMP},
       </if>
@@ -313,6 +329,7 @@
       relation = #{relation,jdbcType=VARCHAR},
       mobilephone = #{mobilephone,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=DECIMAL},
       nobindtime = #{nobindtime,jdbcType=TIMESTAMP},
       nobindreason = #{nobindreason,jdbcType=VARCHAR},
       addfield = #{addfield,jdbcType=VARCHAR},

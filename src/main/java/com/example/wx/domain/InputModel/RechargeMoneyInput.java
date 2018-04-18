@@ -12,8 +12,6 @@ public class RechargeMoneyInput
 
     @ApiModelProperty("电话")
     private String mobilephone="";
-    @ApiModelProperty("验证码")
-    private String verificationcode="";
     @ApiModelProperty("微信号")
     private String openid="";
     @ApiModelProperty("充值金额")
@@ -33,16 +31,6 @@ public class RechargeMoneyInput
     public void setMobilephone(String mobilephone)
     {
         this.mobilephone = mobilephone;
-    }
-
-    public String getVerificationcode()
-    {
-        return verificationcode;
-    }
-
-    public void setVerificationcode(String verificationcode)
-    {
-        this.verificationcode = verificationcode;
     }
 
     public String getOpenid()

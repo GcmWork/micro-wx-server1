@@ -9,15 +9,14 @@ public class UnbindInput
 {
 
     @ApiModelProperty("学生id")
-    public Long studentid=0l;
-    @ApiModelProperty("学号")
-    public String userbh="";
+    public Long studentid=0L;
+
     @ApiModelProperty("微信号")
     private String openid="";
-    @ApiModelProperty("电话")
-    private String mobilephone="";
-    @ApiModelProperty("验证码")
-    private String verificationcode="";
+//    @ApiModelProperty("电话")
+//    private String mobilephone="";
+//    @ApiModelProperty("验证码")
+//    private String verificationcode="";
     @ApiModelProperty("解绑原因")
     private String nobindreason="";
 
@@ -32,25 +31,16 @@ public class UnbindInput
     }
 
 
-    public String getMobilephone()
-    {
-        return mobilephone;
-    }
+//    public String getMobilephone()
+//    {
+//        return mobilephone;
+//    }
+//
+//    public void setMobilephone(String mobilephone)
+//    {
+//        this.mobilephone = mobilephone;
+//    }
 
-    public void setMobilephone(String mobilephone)
-    {
-        this.mobilephone = mobilephone;
-    }
-
-    public String getUserbh()
-    {
-        return userbh;
-    }
-
-    public void setUserbh(String userbh)
-    {
-        this.userbh = userbh;
-    }
 
 
     public Long getStudentid()
@@ -73,13 +63,13 @@ public class UnbindInput
         this.nobindreason = nobindreason;
     }
 
-    public String getVerificationcode()
-    {
-        return verificationcode;
-    }
-
-    public void setVerificationcode(String verificationcode)
-    {
-        this.verificationcode = verificationcode;
-    }
+//    public String getVerificationcode()
+//    {
+//        return verificationcode;
+//    }
+//
+//    public void setVerificationcode(String verificationcode)
+//    {
+//        this.verificationcode = verificationcode;
+//    }
 }

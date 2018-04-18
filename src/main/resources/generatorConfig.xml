@@ -42,21 +42,21 @@
         </javaClientGenerator>
 
 
-        <table tableName="Appeal" domainObjectName="Appeal">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="InAndOutSchool" domainObjectName="InAndOutSchool">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="Recharge" domainObjectName="Recharge">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="Spend" domainObjectName="Spend">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="Student" domainObjectName="Student">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="Appeal" domainObjectName="Appeal">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="InAndOutSchool" domainObjectName="InAndOutSchool">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="Recharge" domainObjectName="Recharge">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="Spend" domainObjectName="Spend">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="Student" domainObjectName="Student">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
         <table tableName="StudentRelation" domainObjectName="StudentRelation">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>

@@ -56,8 +56,8 @@ public class StudentRelationService
     {
         StudentRelationExample example=new StudentRelationExample();
         example.createCriteria().andIsdelEqualTo(0).andStatusEqualTo(1).
-                andOpenidEqualTo(input.getOpenid()).andStudentidEqualTo(input.getStudentid()).
-                andMobilephoneEqualTo(input.getMobilephone());
+                andOpenidEqualTo(input.getOpenid()).andStudentidEqualTo(input.getStudentid());
+              //  andMobilephoneEqualTo(input.getMobilephone());
         List<StudentRelation> list= studentRelationMapper.selectByExample(example);
         if (list.size() > 0)
         {

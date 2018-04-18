@@ -14,7 +14,7 @@ public class RechargeInfoOut
 
     private BigDecimal rechargeamount;
 
-    private Date rechargedate;
+    private String rechargedate;
 
     private String rechargestatus;
 
@@ -54,16 +54,6 @@ public class RechargeInfoOut
     public void setRechargeamount(BigDecimal rechargeamount)
     {
         this.rechargeamount = rechargeamount;
-    }
-
-    public Date getRechargedate()
-    {
-        return rechargedate;
-    }
-
-    public void setRechargedate(Date rechargedate)
-    {
-        this.rechargedate = rechargedate;
     }
 
     public String getRechargestatus()
@@ -114,5 +104,15 @@ public class RechargeInfoOut
     public void setAddfield(String addfield)
     {
         this.addfield = addfield;
+    }
+
+    public String getRechargedate()
+    {
+        return rechargedate;
+    }
+
+    public void setRechargedate(String rechargedate)
+    {
+        this.rechargedate = rechargedate;
     }
 }

@@ -10,10 +10,6 @@ public class AppealInfoOut
 {
     private Long id;
 
-    private String userbh;
-
-    private String openid;
-
     private Date appealtime;
 
     private Integer appealtype;
@@ -47,15 +43,6 @@ public class AppealInfoOut
     }
 
 
-    public String getOpenid()
-    {
-        return openid;
-    }
-
-    public void setOpenid(String openid)
-    {
-        this.openid = openid;
-    }
 
     public Date getAppealtime()
     {
@@ -167,13 +154,4 @@ public class AppealInfoOut
         this.amount3 = amount3;
     }
 
-    public String getUserbh()
-    {
-        return userbh;
-    }
-
-    public void setUserbh(String userbh)
-    {
-        this.userbh = userbh;
-    }
 }

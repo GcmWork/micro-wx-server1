@@ -162,6 +162,8 @@ public class BindingController
             getBidingInfoOut.setParentname(studentRelation.getParentname());
             getBidingInfoOut.setStudentclass(student.getStudentclass());
             getBidingInfoOut.setRelation(studentRelation.getRelation());
+            getBidingInfoOut.setStudentid(studentRelation.getStudentid());
+            getBidingInfoOut.setBalance(studentRelation.getBalance());
             baseOutModel.setData(getBidingInfoOut);
             baseOutModel.setResult(1);
             baseOutModel.setMessage("查询成功");
@@ -177,20 +179,18 @@ public class BindingController
     public BaseOutModel unbind(@RequestBody UnbindInput input)
     {
         BaseOutModel baseOutModel = new BaseOutModel();
-
-
         StudentRelation studentRelation = studentRelationService.getRelationListByUnbindInput(input);
         if (studentRelation != null)
         {
-            ValidateMobileCodeInput va=new ValidateMobileCodeInput();
-            va.setMobilephone(input.getMobilephone());
-            va.setVerificationcode(input.getVerificationcode());
-            baseOutModel =smsController.validatemobilecode(va);
-            if(baseOutModel.getResult().equals(0))
-            {
-                baseOutModel.setMessage("手机号验证码错误");
-                return baseOutModel;
-            }
+//            ValidateMobileCodeInput va=new ValidateMobileCodeInput();
+//            va.setMobilephone(input.getMobilephone());
+//            va.setVerificationcode(input.getVerificationcode());
+//            baseOutModel =smsController.validatemobilecode(va);
+//            if(baseOutModel.getResult().equals(0))
+//            {
+//                baseOutModel.setMessage("手机号验证码错误");
+//                return baseOutModel;
+//            }
             studentRelation.setNobindreason(input.getNobindreason());
             studentRelation.setNobindtime(new Date());
             studentRelation.setStatus(0);
@@ -216,24 +216,24 @@ public class BindingController
         if (studentRelation != null)
         {
 
-            ValidateMobileCodeInput old=new ValidateMobileCodeInput();
-            old.setMobilephone(input.getOldmobilephone());
-            old.setVerificationcode(input.getOldverificationcode());
-           baseOutModel =smsController.validatemobilecode(old);
-           if(baseOutModel.getResult().equals(0))
-           {
-               baseOutModel.setMessage("旧手机号验证码错误");
-               return baseOutModel;
-           }
-            ValidateMobileCodeInput n=new ValidateMobileCodeInput();
-            n.setMobilephone(input.getNewmobilephone());
-            n.setVerificationcode(input.getNewverificationcode());
-            baseOutModel =smsController.validatemobilecode(n);
-            if(baseOutModel.getResult().equals(0))
-            {
-                baseOutModel.setMessage("新手机号验证码错误");
-                return baseOutModel;
-            }
+//            ValidateMobileCodeInput old=new ValidateMobileCodeInput();
+//            old.setMobilephone(input.getOldmobilephone());
+//            old.setVerificationcode(input.getOldverificationcode());
+//           baseOutModel =smsController.validatemobilecode(old);
+//           if(baseOutModel.getResult().equals(0))
+//           {
+//               baseOutModel.setMessage("旧手机号验证码错误");
+//               return baseOutModel;
+//           }
+//            ValidateMobileCodeInput n=new ValidateMobileCodeInput();
+//            n.setMobilephone(input.getNewmobilephone());
+//            n.setVerificationcode(input.getNewverificationcode());
+//            baseOutModel =smsController.validatemobilecode(n);
+//            if(baseOutModel.getResult().equals(0))
+//            {
+//                baseOutModel.setMessage("新手机号验证码错误");
+//                return baseOutModel;
+//            }
             studentRelation.setMobilephone(input.getNewmobilephone());
             Integer count= studentRelationService.updateRelation(studentRelation);
             if(count>0)

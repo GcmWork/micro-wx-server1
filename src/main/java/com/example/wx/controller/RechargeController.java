@@ -1,5 +1,6 @@
 package com.example.wx.controller;
 
+import com.example.wx.common.Convert;
 import com.example.wx.domain.InputModel.RechargeListInput;
 import com.example.wx.domain.InputModel.RechargeMoneyInput;
 import com.example.wx.domain.OutModel.BaseOutModel;
@@ -57,8 +58,11 @@ public class RechargeController
         recharge.setRechargestatus(input.getRechargestatus());
         recharge.setUserbh(student.getUsrbh());
         recharge.setAddfield(input.getAddfield());
+
        if( rechargeService.InsertRecharge(recharge))
        {
+           relation.setBalance(relation.getBalance().add(input.getRechargeamount()));
+           studentRelationService.updateRelation(relation);
            baseOutModel.setResult(1);
            baseOutModel.setMessage("充值成功");
        }else
@@ -72,6 +76,7 @@ public class RechargeController
     @RequestMapping(value = "/getrechargelist/",method = RequestMethod.POST)
     public BaseOutModel<RechargeListOut> GetRechargeList(@RequestBody RechargeListInput input)
     {
+        Convert convert=new Convert();
         BaseOutModel baseOutModel = new BaseOutModel();
         List<Recharge> list = rechargeService.GetRechargeList(input);
         RechargeListOut out = new RechargeListOut();
@@ -88,7 +93,7 @@ public class RechargeController
                 infoOut.setOpenid(item.getOpenid());
                 infoOut.setParentname(item.getParentname());
                 infoOut.setRechargeamount(item.getRechargeamount());
-                infoOut.setRechargedate(item.getRechargedate());
+                infoOut.setRechargedate(convert.DateToStr(item.getRechargedate()));
                 infoOut.setStudentname(item.getStudentname());
                 infoOuts.add(infoOut);
             }

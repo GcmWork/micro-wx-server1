@@ -10,14 +10,14 @@ import java.util.List;
  */
 public class AppealListOut
 {
-    private List<Appeal> list=new ArrayList<>();
+    private List<AppealInfoOut> list=new ArrayList<>();
 
-    public List<Appeal> getList()
+    public List<AppealInfoOut> getList()
     {
         return list;
     }
 
-    public void setList(List<Appeal> list)
+    public void setList(List<AppealInfoOut> list)
     {
         this.list = list;
     }

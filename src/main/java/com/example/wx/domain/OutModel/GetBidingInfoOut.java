@@ -22,8 +22,9 @@ public class GetBidingInfoOut
     @ApiModelProperty("手机号码")
     public String mobilephone="";
     @ApiModelProperty("余额")
-
     public BigDecimal balance=BigDecimal.valueOf(0);
+    @ApiModelProperty
+    public Long studentid=0L;
 
     public String getName()
     {
@@ -91,5 +92,15 @@ public class GetBidingInfoOut
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public Long getStudentid()
+    {
+        return studentid;
+    }
+
+    public void setStudentid(Long studentid)
+    {
+        this.studentid = studentid;
     }
 }

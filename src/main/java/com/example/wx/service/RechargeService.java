@@ -39,4 +39,5 @@ public class RechargeService
         criteria.andOpenidEqualTo(input.getOpenid()).andRelationidEqualTo(input.getRelationid());
         return rechargeMapper.selectByExample(example);
     }
+
 }

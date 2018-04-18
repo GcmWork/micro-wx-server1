@@ -1,5 +1,6 @@
 package com.example.wx.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class StudentRelation {
@@ -17,6 +18,8 @@ public class StudentRelation {
 
     private Integer status;
 
+    private BigDecimal balance;
+
     private Date nobindtime;
 
     private String nobindreason;
@@ -27,7 +30,7 @@ public class StudentRelation {
 
     private Integer isdel;
 
-    public StudentRelation(Long id, String openid, Long studentid, String parentname, String relation, String mobilephone, Integer status, Date nobindtime, String nobindreason, String addfield, Date createtime, Integer isdel) {
+    public StudentRelation(Long id, String openid, Long studentid, String parentname, String relation, String mobilephone, Integer status, BigDecimal balance, Date nobindtime, String nobindreason, String addfield, Date createtime, Integer isdel) {
         this.id = id;
         this.openid = openid;
         this.studentid = studentid;
@@ -35,6 +38,7 @@ public class StudentRelation {
         this.relation = relation;
         this.mobilephone = mobilephone;
         this.status = status;
+        this.balance = balance;
         this.nobindtime = nobindtime;
         this.nobindreason = nobindreason;
         this.addfield = addfield;
@@ -100,6 +104,14 @@ public class StudentRelation {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public Date getNobindtime() {
