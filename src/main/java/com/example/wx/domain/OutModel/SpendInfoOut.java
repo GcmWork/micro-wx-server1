@@ -1,7 +1,6 @@
 package com.example.wx.domain.OutModel;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * Created by Administrator on 2018/4/16.

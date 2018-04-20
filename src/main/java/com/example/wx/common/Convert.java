@@ -40,7 +40,11 @@ public class Convert
         String str = format.format(date);
         return str;
     }
-
+    public String DateToStr2(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        String str = format.format(date);
+        return str;
+    }
 
     /**
      * 获取当前时间

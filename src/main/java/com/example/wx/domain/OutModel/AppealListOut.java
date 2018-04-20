@@ -1,7 +1,5 @@
 package com.example.wx.domain.OutModel;
 
-import com.example.wx.model.Appeal;
-
 import java.util.ArrayList;
 import java.util.List;
 

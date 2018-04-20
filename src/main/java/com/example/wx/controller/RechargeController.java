@@ -61,8 +61,8 @@ public class RechargeController
 
        if( rechargeService.InsertRecharge(recharge))
        {
-           relation.setBalance(relation.getBalance().add(input.getRechargeamount()));
-           studentRelationService.updateRelation(relation);
+//           student.setBalance(student.getBalance().add(input.getRechargeamount()));
+//           studentService.UpdateStudentByID(student);
            baseOutModel.setResult(1);
            baseOutModel.setMessage("充值成功");
        }else
@@ -93,7 +93,7 @@ public class RechargeController
                 infoOut.setOpenid(item.getOpenid());
                 infoOut.setParentname(item.getParentname());
                 infoOut.setRechargeamount(item.getRechargeamount());
-                infoOut.setRechargedate(convert.DateToStr(item.getRechargedate()));
+                infoOut.setRechargedate(convert.DateToStr2(item.getRechargedate()));
                 infoOut.setStudentname(item.getStudentname());
                 infoOuts.add(infoOut);
             }

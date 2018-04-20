@@ -1,7 +1,5 @@
 package com.example.wx.domain.OutModel;
 
-import io.swagger.annotations.ApiModelProperty;
-
 /**
  * Created by Administrator on 2018/3/30.
  */

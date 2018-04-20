@@ -1,10 +1,8 @@
 package com.example.wx.controller;
 
 import com.example.wx.common.Convert;
-import com.example.wx.domain.InputModel.InandoutschoolListInput;
 import com.example.wx.domain.InputModel.SpendListInput;
 import com.example.wx.domain.OutModel.BaseOutModel;
-import com.example.wx.domain.OutModel.InandoutschoolListOut;
 import com.example.wx.domain.OutModel.SpendInfoOut;
 import com.example.wx.domain.OutModel.SpendListOut;
 import com.example.wx.model.Spend;
@@ -48,7 +46,7 @@ public class SpendController
                 infoOut.setAfteramount(item.getAfteramount());
                 infoOut.setAmount(item.getAmount());
                 infoOut.setSpendtype(item.getSpendtype());
-                infoOut.setSpendtime(convert.DateToStr(item.getSpendtime()));
+                infoOut.setSpendtime(convert.DateToStr2(item.getSpendtime()));
                 infoOut.setBeforeamount(item.getBeforeamount());
                 infoOuts.add(infoOut);
             }

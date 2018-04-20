@@ -2,11 +2,9 @@ package com.example.wx.controller;
 
 import com.example.wx.common.Convert;
 import com.example.wx.domain.InputModel.InandoutschoolListInput;
-import com.example.wx.domain.InputModel.SubmitAppealInput;
 import com.example.wx.domain.OutModel.BaseOutModel;
 import com.example.wx.domain.OutModel.InandoutschoolInfoOut;
 import com.example.wx.domain.OutModel.InandoutschoolListOut;
-import com.example.wx.domain.OutModel.SubmitAppealOut;
 import com.example.wx.model.InAndOutSchool;
 import com.example.wx.service.InAndOutSchoolService;
 import io.swagger.annotations.Api;
@@ -49,7 +47,7 @@ public class InAndOutSchoolController
                 InandoutschoolInfoOut inandoutschoolInfoOut=new InandoutschoolInfoOut();
                 inandoutschoolInfoOut.setInouttype(item.getInouttype());
                 inandoutschoolInfoOut.setPlace(item.getPlace());
-                inandoutschoolInfoOut.setInouttime(convert.DateToStr1(item.getInouttime()));
+                inandoutschoolInfoOut.setInouttime(convert.DateToStr2(item.getInouttime()));
                 infoOuts.add(inandoutschoolInfoOut);
             }
             inandoutschoolListOut.setList(infoOuts);

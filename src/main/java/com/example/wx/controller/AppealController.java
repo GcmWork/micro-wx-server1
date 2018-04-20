@@ -61,7 +61,7 @@ public class AppealController
             baseOutModel.setMessage("请传入当前登录人的微信号");
             return baseOutModel;
         }
-        if (input.getOldmobilephone().equals(""))
+        if (input.getNewmobilephone().equals("")||input.getNewmobilephone()==null)
         {
             baseOutModel.setResult(0);
             baseOutModel.setMessage("请传入要解绑的手机号");
@@ -89,11 +89,11 @@ public class AppealController
                 return baseOutModel;
             }
         }
+        Convert convert=new Convert();
         Student student = studentService.GetStudentByID(input.getStudentid());
         StudentRelation relation= studentRelationService.getRelationListByStudentidAndOpenid(input.getOpenid(),input.getStudentid());
         if(relation!=null)
         {
-            appeal.setRelation(input.getRelation());
             appeal.setOpenid(input.getOpenid());
             appeal.setAppealtype(input.getAppealtype());
             appeal.setStudentname(student.getName());
@@ -102,9 +102,9 @@ public class AppealController
             appeal.setAmount2(input.getAmount2());
             appeal.setAmount3(input.getAmount3());
             appeal.setAppealtime(new Date());
-            appeal.setRechargetime1(input.getRechargetime1());
-            appeal.setRechargetime2(input.getRechargetime2());
-            appeal.setRechargetime3(input.getRechargetime3());
+            appeal.setRechargetime1(convert.StrToDate( input.getRechargetime1()));
+            appeal.setRechargetime2(convert.StrToDate(input.getRechargetime2()));
+            appeal.setRechargetime3(convert.StrToDate(input.getRechargetime3()));
             if (appealService.InsertAppeal(appeal))
             {
                 baseOutModel.setMessage("申请成功");
@@ -130,11 +130,21 @@ public class AppealController
         Appeal appeal = appealService.GetAppealById(input.getAppealid());
         if (appeal != null)
         {
-            appeal.setAppealresult(input.getAppealresult());
-            if (appealService.UpdateAppeal(appeal))
+          StudentRelation ralation=  studentRelationService.getStudetntRelationByID(appeal.getRelationid());
+            ralation.setMobilephone(appeal.getNewmobilephone());
+            if (studentRelationService.updateRelation(ralation)>0)
             {
-                baseOutModel.setMessage("审核成功");
-                baseOutModel.setResult(1);
+                appeal.setAppealresult(input.getAppealresult());
+               if( appealService.UpdateAppeal(appeal))
+               {
+                   baseOutModel.setMessage("审核成功");
+                   baseOutModel.setResult(1);
+               } else
+               {
+
+                   baseOutModel.setMessage("审核失败");
+                   baseOutModel.setResult(1);
+               }
             } else
             {
 

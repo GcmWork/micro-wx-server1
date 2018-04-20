@@ -91,7 +91,7 @@ public class SmsController
         return baseOutModel;
     }
 
-    private SendSmsResult sendVerificationcode(String mobile,String content,SmsInfo smsInfo)
+    private SendSmsResult sendVerificationcode(String mobile, String content, SmsInfo smsInfo)
     {
         try
         {
@@ -130,7 +130,7 @@ public class SmsController
 
     @ApiOperation("验证码验证")
     @RequestMapping(value = "/validatemobilecode/",method = RequestMethod.POST)
-    public  BaseOutModel  validatemobilecode(@RequestBody ValidateMobileCodeInput input)
+    public BaseOutModel validatemobilecode(@RequestBody ValidateMobileCodeInput input)
     {
         BaseOutModel baseOutModel = new BaseOutModel();
         boolean flag = smsInfoService.ValidateMobile(input);
