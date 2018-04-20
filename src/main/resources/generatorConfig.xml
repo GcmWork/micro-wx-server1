@@ -54,9 +54,9 @@
         <!--<table tableName="Spend" domainObjectName="Spend">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <!--<table tableName="Student" domainObjectName="Student">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <table tableName="Student" domainObjectName="Student">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
         <table tableName="StudentRelation" domainObjectName="StudentRelation">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
