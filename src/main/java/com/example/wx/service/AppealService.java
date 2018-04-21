@@ -36,4 +36,11 @@ public class AppealService
         example.createCriteria().andOpenidEqualTo(OpenId).andIsdelEqualTo(0).andAppealtypeEqualTo(appealtype);
         return appealMapper.selectByExample(example);
     }
+    public List<Appeal> GetAppealListByStudentClass(String studentclass,int appealtype)
+    {
+        AppealExample example=new AppealExample();
+        example.createCriteria().andStudentclassEqualTo(studentclass).andIsdelEqualTo(0).andAppealtypeEqualTo(appealtype);
+        return appealMapper.selectByExample(example);
+    }
+
 }

@@ -4,6 +4,7 @@ import com.example.wx.common.Convert;
 import com.example.wx.domain.InputModel.AppealListInput;
 import com.example.wx.domain.InputModel.AppealResultInput;
 import com.example.wx.domain.InputModel.SubmitAppealInput;
+import com.example.wx.domain.InputModel.TeacherAppealListInput;
 import com.example.wx.domain.OutModel.AppealInfoOut;
 import com.example.wx.domain.OutModel.AppealListOut;
 import com.example.wx.domain.OutModel.BaseOutModel;
@@ -182,13 +183,74 @@ public class AppealController
                 appealInfoOut.setRechargetime3(item.getRechargetime3());
                 infoOuts.add(appealInfoOut);
             }
-            out.setList(infoOuts);
+            out.setCalllist(infoOuts);
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
             baseOutModel.setMessage("查询成功");
         }else
         {
             baseOutModel.setResult(1);
+            baseOutModel.setMessage("没有提交过申诉");
+        }
+        return baseOutModel;
+    }
+    @ApiOperation("审核列表")
+    @RequestMapping(value = "/teacherappeallist/", method = RequestMethod.POST)
+    public BaseOutModel<AppealListOut> teacherappeallist(@RequestBody TeacherAppealListInput input)
+    {
+        BaseOutModel baseOutModel = new BaseOutModel();
+        //在线
+        List<Appeal> onlinelist = appealService.GetAppealListByStudentClass(input.getStudentclass(), 1);
+        //电话
+        List<Appeal> Calllist = appealService.GetAppealListByStudentClass(input.getStudentclass(), 2);
+        if (onlinelist.size() == 0 && Calllist.size() == 0)
+        {
+
+            AppealListOut out = new AppealListOut();
+            if (onlinelist.size() > 0)
+            {
+                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                for (Appeal item : onlinelist)
+                {
+                    AppealInfoOut appealInfoOut = new AppealInfoOut();
+                    appealInfoOut.setId(item.getId());
+                    appealInfoOut.setAmount1(item.getAmount1());
+                    appealInfoOut.setAmount2(item.getAmount2());
+                    appealInfoOut.setAmount3(item.getAmount3());
+                    appealInfoOut.setAppealtime(item.getAppealtime());
+                    appealInfoOut.setAppealresult(item.getAppealresult());
+                    appealInfoOut.setRechargetime1(item.getRechargetime1());
+                    appealInfoOut.setRechargetime2(item.getRechargetime2());
+                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    infoOuts.add(appealInfoOut);
+                }
+                out.setOnlinelist(infoOuts);
+            }
+            if (Calllist.size() > 0)
+            {
+                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                for (Appeal item : Calllist)
+                {
+                    AppealInfoOut appealInfoOut = new AppealInfoOut();
+                    appealInfoOut.setId(item.getId());
+                    appealInfoOut.setAmount1(item.getAmount1());
+                    appealInfoOut.setAmount2(item.getAmount2());
+                    appealInfoOut.setAmount3(item.getAmount3());
+                    appealInfoOut.setAppealtime(item.getAppealtime());
+                    appealInfoOut.setAppealresult(item.getAppealresult());
+                    appealInfoOut.setRechargetime1(item.getRechargetime1());
+                    appealInfoOut.setRechargetime2(item.getRechargetime2());
+                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    infoOuts.add(appealInfoOut);
+                }
+                out.setCalllist(infoOuts);
+            }
+            baseOutModel.setData(out);
+            baseOutModel.setResult(1);
+            baseOutModel.setMessage("没有提交过申诉");
+        } else
+        {
+            baseOutModel.setResult(0);
             baseOutModel.setMessage("没有提交过申诉");
         }
         return baseOutModel;
