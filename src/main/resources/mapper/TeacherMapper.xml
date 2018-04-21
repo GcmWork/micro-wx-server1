@@ -7,6 +7,7 @@
       <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="studentclass" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="addfield" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="isdel" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, openid, username, password, addfield, createtime, isdel
+    id, openid, username, password, studentclass, addfield, createtime, isdel
   </sql>
   <select id="selectByExample" parameterType="com.example.wx.model.TeacherExample" resultMap="BaseResultMap">
     select
@@ -108,11 +109,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into Teacher (openid, username, password, 
-      addfield, createtime, isdel
-      )
+      studentclass, addfield, createtime, 
+      isdel)
     values (#{openid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{addfield,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER}
-      )
+      #{studentclass,jdbcType=VARCHAR}, #{addfield,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{isdel,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.wx.model.Teacher">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -128,6 +129,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="studentclass != null">
+        studentclass,
       </if>
       <if test="addfield != null">
         addfield,
@@ -148,6 +152,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="studentclass != null">
+        #{studentclass,jdbcType=VARCHAR},
       </if>
       <if test="addfield != null">
         #{addfield,jdbcType=VARCHAR},
@@ -181,6 +188,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.studentclass != null">
+        studentclass = #{record.studentclass,jdbcType=VARCHAR},
+      </if>
       <if test="record.addfield != null">
         addfield = #{record.addfield,jdbcType=VARCHAR},
       </if>
@@ -201,6 +211,7 @@
       openid = #{record.openid,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      studentclass = #{record.studentclass,jdbcType=VARCHAR},
       addfield = #{record.addfield,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       isdel = #{record.isdel,jdbcType=INTEGER}
@@ -220,6 +231,9 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="studentclass != null">
+        studentclass = #{studentclass,jdbcType=VARCHAR},
+      </if>
       <if test="addfield != null">
         addfield = #{addfield,jdbcType=VARCHAR},
       </if>
@@ -237,6 +251,7 @@
     set openid = #{openid,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      studentclass = #{studentclass,jdbcType=VARCHAR},
       addfield = #{addfield,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       isdel = #{isdel,jdbcType=INTEGER}

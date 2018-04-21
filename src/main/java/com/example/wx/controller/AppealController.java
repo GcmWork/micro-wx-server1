@@ -165,28 +165,56 @@ public class AppealController
     {
         BaseOutModel baseOutModel = new BaseOutModel();
         List<Appeal> list = appealService.GetAppealListByOpenId(input.getOpenid(),input.getAppealtype());
-        if(list.size()>0)
+
+        //在线
+        List<Appeal> onlinelist = appealService.GetAppealListByOpenId(input.getOpenid(), 1);
+        //电话
+        List<Appeal> Calllist = appealService.GetAppealListByOpenId(input.getOpenid(), 2);
+        if (onlinelist.size() == 0 && Calllist.size() == 0)
         {
-            AppealListOut out=new AppealListOut();
-            List<AppealInfoOut> infoOuts=new ArrayList<>();
-            for (Appeal item:list)
+
+            AppealListOut out = new AppealListOut();
+            if (onlinelist.size() > 0)
             {
-                AppealInfoOut appealInfoOut=new AppealInfoOut();
-                appealInfoOut.setId(item.getId());
-                appealInfoOut.setAmount1(item.getAmount1());
-                appealInfoOut.setAmount2(item.getAmount2());
-                appealInfoOut.setAmount3(item.getAmount3());
-                appealInfoOut.setAppealtime(item.getAppealtime());
-                appealInfoOut.setAppealresult(item.getAppealresult());
-                appealInfoOut.setRechargetime1(item.getRechargetime1());
-                appealInfoOut.setRechargetime2(item.getRechargetime2());
-                appealInfoOut.setRechargetime3(item.getRechargetime3());
-                infoOuts.add(appealInfoOut);
+                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                for (Appeal item : onlinelist)
+                {
+                    AppealInfoOut appealInfoOut = new AppealInfoOut();
+                    appealInfoOut.setId(item.getId());
+                    appealInfoOut.setAmount1(item.getAmount1());
+                    appealInfoOut.setAmount2(item.getAmount2());
+                    appealInfoOut.setAmount3(item.getAmount3());
+                    appealInfoOut.setAppealtime(item.getAppealtime());
+                    appealInfoOut.setAppealresult(item.getAppealresult());
+                    appealInfoOut.setRechargetime1(item.getRechargetime1());
+                    appealInfoOut.setRechargetime2(item.getRechargetime2());
+                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    infoOuts.add(appealInfoOut);
+                }
+                out.setOnlinelist(infoOuts);
             }
-            out.setCalllist(infoOuts);
+            if (Calllist.size() > 0)
+            {
+                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                for (Appeal item : Calllist)
+                {
+                    AppealInfoOut appealInfoOut = new AppealInfoOut();
+                    appealInfoOut.setId(item.getId());
+                    appealInfoOut.setAmount1(item.getAmount1());
+                    appealInfoOut.setAmount2(item.getAmount2());
+                    appealInfoOut.setAmount3(item.getAmount3());
+                    appealInfoOut.setAppealtime(item.getAppealtime());
+                    appealInfoOut.setAppealresult(item.getAppealresult());
+                    appealInfoOut.setRechargetime1(item.getRechargetime1());
+                    appealInfoOut.setRechargetime2(item.getRechargetime2());
+                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    infoOuts.add(appealInfoOut);
+                }
+                out.setCalllist(infoOuts);
+            }
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
-            baseOutModel.setMessage("查询成功");
+            baseOutModel.setMessage("没有提交过申诉");
         }else
         {
             baseOutModel.setResult(1);

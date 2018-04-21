@@ -33,7 +33,7 @@ public class TeacherController
         if (teacher!=null)
         {
             TeacherInfoOut out=new TeacherInfoOut();
-          //  out.setStudentcalss(teacher.g);
+           out.setStudentcalss(teacher.getStudentclass());
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
             baseOutModel.setMessage("查询成功");
