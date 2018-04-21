@@ -95,6 +95,8 @@ public class AppealController
         StudentRelation relation= studentRelationService.getRelationListByStudentidAndOpenid(input.getOpenid(),input.getStudentid());
         if(relation!=null)
         {
+            appeal.setStudentclass(student.getStudentclass());
+            appeal.setRelation(relation.getRelation());
             appeal.setOpenid(input.getOpenid());
             appeal.setAppealtype(input.getAppealtype());
             appeal.setStudentname(student.getName());

@@ -34,6 +34,7 @@ public class TeacherController
         {
             TeacherInfoOut out=new TeacherInfoOut();
            out.setStudentcalss(teacher.getStudentclass());
+           out.setUsername(teacher.getUsername());
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
             baseOutModel.setMessage("查询成功");
