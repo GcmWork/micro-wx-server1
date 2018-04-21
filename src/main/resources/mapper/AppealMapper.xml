@@ -23,6 +23,7 @@
       <arg column="addfield" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="isdel" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="studentclass" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -86,7 +87,7 @@
   <sql id="Base_Column_List">
     id, relationid, openid, poarentname, relation, studentname, appealtime, appealtype, 
     oldmobilephone, newmobilephone, appealresult, rechargetime1, amount1, rechargetime2, 
-    amount2, rechargetime3, amount3, addfield, createtime, isdel
+    amount2, rechargetime3, amount3, addfield, createtime, isdel, studentclass
   </sql>
   <select id="selectByExample" parameterType="com.example.wx.model.AppealExample" resultMap="BaseResultMap">
     select
@@ -128,14 +129,14 @@
       appealresult, rechargetime1, amount1, 
       rechargetime2, amount2, rechargetime3, 
       amount3, addfield, createtime, 
-      isdel)
+      isdel, studentclass)
     values (#{relationid,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{poarentname,jdbcType=VARCHAR}, 
       #{relation,jdbcType=VARCHAR}, #{studentname,jdbcType=VARCHAR}, #{appealtime,jdbcType=TIMESTAMP}, 
       #{appealtype,jdbcType=INTEGER}, #{oldmobilephone,jdbcType=VARCHAR}, #{newmobilephone,jdbcType=VARCHAR}, 
       #{appealresult,jdbcType=VARCHAR}, #{rechargetime1,jdbcType=TIMESTAMP}, #{amount1,jdbcType=DECIMAL}, 
       #{rechargetime2,jdbcType=TIMESTAMP}, #{amount2,jdbcType=DECIMAL}, #{rechargetime3,jdbcType=TIMESTAMP}, 
       #{amount3,jdbcType=DECIMAL}, #{addfield,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{isdel,jdbcType=INTEGER})
+      #{isdel,jdbcType=INTEGER}, #{studentclass,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.wx.model.Appeal">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -200,6 +201,9 @@
       <if test="isdel != null">
         isdel,
       </if>
+      <if test="studentclass != null">
+        studentclass,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="relationid != null">
@@ -258,6 +262,9 @@
       </if>
       <if test="isdel != null">
         #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="studentclass != null">
+        #{studentclass,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -330,6 +337,9 @@
       <if test="record.isdel != null">
         isdel = #{record.isdel,jdbcType=INTEGER},
       </if>
+      <if test="record.studentclass != null">
+        studentclass = #{record.studentclass,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -356,7 +366,8 @@
       amount3 = #{record.amount3,jdbcType=DECIMAL},
       addfield = #{record.addfield,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      isdel = #{record.isdel,jdbcType=INTEGER}
+      isdel = #{record.isdel,jdbcType=INTEGER},
+      studentclass = #{record.studentclass,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -421,6 +432,9 @@
       <if test="isdel != null">
         isdel = #{isdel,jdbcType=INTEGER},
       </if>
+      <if test="studentclass != null">
+        studentclass = #{studentclass,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -444,7 +458,8 @@
       amount3 = #{amount3,jdbcType=DECIMAL},
       addfield = #{addfield,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
-      isdel = #{isdel,jdbcType=INTEGER}
+      isdel = #{isdel,jdbcType=INTEGER},
+      studentclass = #{studentclass,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -56,5 +56,9 @@ public class StudentService
         return null;
     }
 
+    public  boolean UpdateStudentByID(Student student)
+    {
+        return  studentMapper.updateByPrimaryKeySelective(student)>0;
+    }
 
 }

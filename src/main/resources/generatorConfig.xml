@@ -42,9 +42,9 @@
         </javaClientGenerator>
 
 
-        <!--<table tableName="Appeal" domainObjectName="Appeal">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <table tableName="Appeal" domainObjectName="Appeal">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
         <!--<table tableName="InAndOutSchool" domainObjectName="InAndOutSchool">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
@@ -54,13 +54,13 @@
         <!--<table tableName="Spend" domainObjectName="Spend">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="Student" domainObjectName="Student">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="Teacher" domainObjectName="Teacher">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
-        <table tableName="StudentRelation" domainObjectName="StudentRelation">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="StudentRelation" domainObjectName="StudentRelation">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--<table tableName="SmsInfo" domainObjectName="SmsInfo">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->

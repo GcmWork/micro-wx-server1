@@ -61,8 +61,8 @@ public class RechargeController
 
        if( rechargeService.InsertRecharge(recharge))
        {
-//           student.setBalance(student.getBalance().add(input.getRechargeamount()));
-//           studentService.UpdateStudentByID(student);
+           student.setBalance(student.getBalance().add(input.getRechargeamount()));
+           studentService.UpdateStudentByID(student);
            baseOutModel.setResult(1);
            baseOutModel.setMessage("充值成功");
        }else

@@ -1385,6 +1385,76 @@ public class AppealExample {
             addCriterion("isdel not between", value1, value2, "isdel");
             return (Criteria) this;
         }
+
+        public Criteria andStudentclassIsNull() {
+            addCriterion("studentclass is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassIsNotNull() {
+            addCriterion("studentclass is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassEqualTo(String value) {
+            addCriterion("studentclass =", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassNotEqualTo(String value) {
+            addCriterion("studentclass <>", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassGreaterThan(String value) {
+            addCriterion("studentclass >", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassGreaterThanOrEqualTo(String value) {
+            addCriterion("studentclass >=", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassLessThan(String value) {
+            addCriterion("studentclass <", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassLessThanOrEqualTo(String value) {
+            addCriterion("studentclass <=", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassLike(String value) {
+            addCriterion("studentclass like", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassNotLike(String value) {
+            addCriterion("studentclass not like", value, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassIn(List<String> values) {
+            addCriterion("studentclass in", values, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassNotIn(List<String> values) {
+            addCriterion("studentclass not in", values, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassBetween(String value1, String value2) {
+            addCriterion("studentclass between", value1, value2, "studentclass");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentclassNotBetween(String value1, String value2) {
+            addCriterion("studentclass not between", value1, value2, "studentclass");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

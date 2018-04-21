@@ -44,7 +44,9 @@ public class Appeal {
 
     private Integer isdel;
 
-    public Appeal(Long id, Long relationid, String openid, String poarentname, String relation, String studentname, Date appealtime, Integer appealtype, String oldmobilephone, String newmobilephone, String appealresult, Date rechargetime1, BigDecimal amount1, Date rechargetime2, BigDecimal amount2, Date rechargetime3, BigDecimal amount3, String addfield, Date createtime, Integer isdel) {
+    private String studentclass;
+
+    public Appeal(Long id, Long relationid, String openid, String poarentname, String relation, String studentname, Date appealtime, Integer appealtype, String oldmobilephone, String newmobilephone, String appealresult, Date rechargetime1, BigDecimal amount1, Date rechargetime2, BigDecimal amount2, Date rechargetime3, BigDecimal amount3, String addfield, Date createtime, Integer isdel, String studentclass) {
         this.id = id;
         this.relationid = relationid;
         this.openid = openid;
@@ -65,6 +67,7 @@ public class Appeal {
         this.addfield = addfield;
         this.createtime = createtime;
         this.isdel = isdel;
+        this.studentclass = studentclass;
     }
 
     public Appeal() {
@@ -229,5 +232,13 @@ public class Appeal {
 
     public void setIsdel(Integer isdel) {
         this.isdel = isdel;
+    }
+
+    public String getStudentclass() {
+        return studentclass;
+    }
+
+    public void setStudentclass(String studentclass) {
+        this.studentclass = studentclass == null ? null : studentclass.trim();
     }
 }

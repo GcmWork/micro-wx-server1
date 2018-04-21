@@ -163,7 +163,7 @@ public class BindingController
             getBidingInfoOut.setStudentclass(student.getStudentclass());
             getBidingInfoOut.setRelation(studentRelation.getRelation());
             getBidingInfoOut.setStudentid(studentRelation.getStudentid());
-//            getBidingInfoOut.setBalance(student.getBalance());
+            getBidingInfoOut.setBalance(student.getBalance());
             baseOutModel.setData(getBidingInfoOut);
             baseOutModel.setResult(1);
             baseOutModel.setMessage("查询成功");
