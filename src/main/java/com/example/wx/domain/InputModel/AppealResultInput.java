@@ -7,9 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class AppealResultInput
 {
-    @ApiModelProperty("申诉id")
-    private Long appealid=0L;
-    @ApiModelProperty("申诉结果 申诉通过或 申诉拒绝")
+    @ApiModelProperty("申诉id 批量操作，用英文逗号分隔")
+    private String  appealids="";
+    @ApiModelProperty("申诉结果 申诉通过 或 申诉拒绝")
     private String appealresult="";
 
 
@@ -23,13 +23,13 @@ public class AppealResultInput
         this.appealresult = appealresult;
     }
 
-    public Long getAppealid()
+    public String getAppealids()
     {
-        return appealid;
+        return appealids;
     }
 
-    public void setAppealid(Long appealid)
+    public void setAppealids(String appealids)
     {
-        this.appealid = appealid;
+        this.appealids = appealids;
     }
 }

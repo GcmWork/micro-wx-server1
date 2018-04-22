@@ -23,7 +23,7 @@ public class AppealService
     }
     public boolean UpdateAppeal(Appeal appeal)
     {
-        return appealMapper.insertSelective(appeal)>0;
+        return appealMapper.updateByPrimaryKeySelective(appeal)>0;
     }
 
     public Appeal GetAppealById(long appealid)
@@ -33,13 +33,24 @@ public class AppealService
     public List<Appeal> GetAppealListByOpenId(String OpenId, Integer appealtype)
     {
         AppealExample example=new AppealExample();
-        example.createCriteria().andOpenidEqualTo(OpenId).andIsdelEqualTo(0).andAppealtypeEqualTo(appealtype);
+        example.createCriteria().andOpenidEqualTo(OpenId).andIsdelEqualTo(0).andAppealtypeEqualTo(appealtype).andAppealresultEqualTo("待审核");
         return appealMapper.selectByExample(example);
     }
     public List<Appeal> GetAppealListByStudentClass(String studentclass,int appealtype)
     {
         AppealExample example=new AppealExample();
-        example.createCriteria().andStudentclassEqualTo(studentclass).andIsdelEqualTo(0).andAppealtypeEqualTo(appealtype);
+        example.createCriteria().andStudentclassEqualTo(studentclass).andIsdelEqualTo(0).andAppealtypeEqualTo(appealtype).andAppealresultEqualTo("待审核");
+        return appealMapper.selectByExample(example);
+    }
+
+    public Appeal GetAppealByID(long id)
+    {
+        return appealMapper.selectByPrimaryKey(id);
+    }
+    public List<Appeal> GetAppealByIDs(List<Long> ids)
+    {
+        AppealExample example=new AppealExample();
+        example.createCriteria().andIsdelEqualTo(0).andIdIn(ids);
         return appealMapper.selectByExample(example);
     }
 

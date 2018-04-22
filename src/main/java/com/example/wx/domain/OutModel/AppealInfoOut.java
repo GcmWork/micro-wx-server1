@@ -8,81 +8,24 @@ import java.util.Date;
  */
 public class AppealInfoOut
 {
-    private Long id;
 
-    private Date appealtime;
-
-    private Integer appealtype;
-
-    private String oldmobilephone;
-
-    private String newmobilephone;
+    public  String name;
+    public String userbh;
+    private String appealtime;
 
     private String appealresult;
 
-    private Date rechargetime1;
+    private String rechargetime1;
 
     private BigDecimal amount1;
 
-    private Date rechargetime2;
+    private String rechargetime2;
 
     private BigDecimal amount2;
 
-    private Date rechargetime3;
+    private String rechargetime3;
 
     private BigDecimal amount3;
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-
-
-    public Date getAppealtime()
-    {
-        return appealtime;
-    }
-
-    public void setAppealtime(Date appealtime)
-    {
-        this.appealtime = appealtime;
-    }
-
-    public Integer getAppealtype()
-    {
-        return appealtype;
-    }
-
-    public void setAppealtype(Integer appealtype)
-    {
-        this.appealtype = appealtype;
-    }
-
-    public String getOldmobilephone()
-    {
-        return oldmobilephone;
-    }
-
-    public void setOldmobilephone(String oldmobilephone)
-    {
-        this.oldmobilephone = oldmobilephone;
-    }
-
-    public String getNewmobilephone()
-    {
-        return newmobilephone;
-    }
-
-    public void setNewmobilephone(String newmobilephone)
-    {
-        this.newmobilephone = newmobilephone;
-    }
 
     public String getAppealresult()
     {
@@ -92,16 +35,6 @@ public class AppealInfoOut
     public void setAppealresult(String appealresult)
     {
         this.appealresult = appealresult;
-    }
-
-    public Date getRechargetime1()
-    {
-        return rechargetime1;
-    }
-
-    public void setRechargetime1(Date rechargetime1)
-    {
-        this.rechargetime1 = rechargetime1;
     }
 
     public BigDecimal getAmount1()
@@ -114,15 +47,6 @@ public class AppealInfoOut
         this.amount1 = amount1;
     }
 
-    public Date getRechargetime2()
-    {
-        return rechargetime2;
-    }
-
-    public void setRechargetime2(Date rechargetime2)
-    {
-        this.rechargetime2 = rechargetime2;
-    }
 
     public BigDecimal getAmount2()
     {
@@ -134,15 +58,6 @@ public class AppealInfoOut
         this.amount2 = amount2;
     }
 
-    public Date getRechargetime3()
-    {
-        return rechargetime3;
-    }
-
-    public void setRechargetime3(Date rechargetime3)
-    {
-        this.rechargetime3 = rechargetime3;
-    }
 
     public BigDecimal getAmount3()
     {
@@ -154,4 +69,63 @@ public class AppealInfoOut
         this.amount3 = amount3;
     }
 
+    public String getRechargetime1()
+    {
+        return rechargetime1;
+    }
+
+    public void setRechargetime1(String rechargetime1)
+    {
+        this.rechargetime1 = rechargetime1;
+    }
+
+    public String getRechargetime2()
+    {
+        return rechargetime2;
+    }
+
+    public void setRechargetime2(String rechargetime2)
+    {
+        this.rechargetime2 = rechargetime2;
+    }
+
+    public String getRechargetime3()
+    {
+        return rechargetime3;
+    }
+
+    public void setRechargetime3(String rechargetime3)
+    {
+        this.rechargetime3 = rechargetime3;
+    }
+
+    public String getAppealtime()
+    {
+        return appealtime;
+    }
+
+    public void setAppealtime(String appealtime)
+    {
+        this.appealtime = appealtime;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getUserbh()
+    {
+        return userbh;
+    }
+
+    public void setUserbh(String userbh)
+    {
+        this.userbh = userbh;
+    }
 }

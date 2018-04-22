@@ -8,25 +8,25 @@ import java.util.List;
  */
 public class AppealListOut
 {
-    private List<AppealInfoOut> onlinelist=new ArrayList<>();
-    private List<AppealInfoOut> calllist=new ArrayList<>();
+    private List<AppealListInfoOut> onlinelist=new ArrayList<>();
+    private List<AppealListInfoOut> calllist=new ArrayList<>();
 
-    public List<AppealInfoOut> getOnlinelist()
+    public List<AppealListInfoOut> getOnlinelist()
     {
         return onlinelist;
     }
 
-    public void setOnlinelist(List<AppealInfoOut> onlinelist)
+    public void setOnlinelist(List<AppealListInfoOut> onlinelist)
     {
         this.onlinelist = onlinelist;
     }
 
-    public List<AppealInfoOut> getCalllist()
+    public List<AppealListInfoOut> getCalllist()
     {
         return calllist;
     }
 
-    public void setCalllist(List<AppealInfoOut> calllist)
+    public void setCalllist(List<AppealListInfoOut> calllist)
     {
         this.calllist = calllist;
     }

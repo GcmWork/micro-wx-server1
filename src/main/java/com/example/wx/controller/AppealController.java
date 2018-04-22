@@ -1,14 +1,8 @@
 package com.example.wx.controller;
 
 import com.example.wx.common.Convert;
-import com.example.wx.domain.InputModel.AppealListInput;
-import com.example.wx.domain.InputModel.AppealResultInput;
-import com.example.wx.domain.InputModel.SubmitAppealInput;
-import com.example.wx.domain.InputModel.TeacherAppealListInput;
-import com.example.wx.domain.OutModel.AppealInfoOut;
-import com.example.wx.domain.OutModel.AppealListOut;
-import com.example.wx.domain.OutModel.BaseOutModel;
-import com.example.wx.domain.OutModel.SubmitAppealOut;
+import com.example.wx.domain.InputModel.*;
+import com.example.wx.domain.OutModel.*;
 import com.example.wx.model.Appeal;
 import com.example.wx.model.Student;
 import com.example.wx.model.StudentRelation;
@@ -95,11 +89,13 @@ public class AppealController
         StudentRelation relation= studentRelationService.getRelationListByStudentidAndOpenid(input.getOpenid(),input.getStudentid());
         if(relation!=null)
         {
+            appeal.setAppealresult("待审核");
             appeal.setStudentclass(student.getStudentclass());
             appeal.setRelation(relation.getRelation());
             appeal.setOpenid(input.getOpenid());
             appeal.setAppealtype(input.getAppealtype());
             appeal.setStudentname(student.getName());
+            appeal.setPoarentname(relation.getParentname());
             appeal.setRelationid(relation.getId());
             appeal.setAmount1(input.getAmount1());
             appeal.setAmount2(input.getAmount2());
@@ -130,28 +126,59 @@ public class AppealController
     public BaseOutModel appealresult(@RequestBody AppealResultInput input)
     {
         BaseOutModel baseOutModel = new BaseOutModel();
-        Appeal appeal = appealService.GetAppealById(input.getAppealid());
-        if (appeal != null)
-        {
-          StudentRelation ralation=  studentRelationService.getStudetntRelationByID(appeal.getRelationid());
-            ralation.setMobilephone(appeal.getNewmobilephone());
-            if (studentRelationService.updateRelation(ralation)>0)
-            {
-                appeal.setAppealresult(input.getAppealresult());
-               if( appealService.UpdateAppeal(appeal))
-               {
-                   baseOutModel.setMessage("审核成功");
-                   baseOutModel.setResult(1);
-               } else
-               {
 
-                   baseOutModel.setMessage("审核失败");
-                   baseOutModel.setResult(1);
-               }
+        if (input.getAppealids().equals(""))
+        {
+
+            baseOutModel.setMessage("请输入id");
+            baseOutModel.setResult(0);
+        }
+        String[] Arr = input.getAppealids().split(",");
+        List<Long> ids = new ArrayList<>();
+        for (String item : Arr)
+        {
+            ids.add(Long.valueOf(item));
+        }
+
+        List<Appeal> appealList = appealService.GetAppealByIDs(ids);
+        if (appealList.size() > 0)
+        {
+            boolean falg = true;
+            if (input.getAppealresult() .equals( "审核通过"))
+            {
+                for (Appeal appeal : appealList)
+                {
+
+                    StudentRelation ralation = studentRelationService.getStudetntRelationByID(appeal.getRelationid());
+                    ralation.setMobilephone(appeal.getNewmobilephone());
+                    falg = falg & studentRelationService.updateRelation(ralation) > 0;
+                    if (falg)
+                    {
+                        appeal.setAppealresult(input.getAppealresult());
+                        if (appealService.UpdateAppeal(appeal))
+                        {
+                            falg=falg&true;
+                        }else
+                        {
+                            falg=falg&false;
+                        }
+                    }
+
+                }
+                if (falg)
+                {
+                    baseOutModel.setMessage("审核成功");
+                    baseOutModel.setResult(1);
+                } else
+                {
+
+                    baseOutModel.setMessage("审核失败");
+                    baseOutModel.setResult(1);
+                }
+
             } else
             {
-
-                baseOutModel.setMessage("审核失败");
+                baseOutModel.setMessage("操作成功");
                 baseOutModel.setResult(1);
             }
         } else
@@ -165,6 +192,7 @@ public class AppealController
     @RequestMapping(value = "/appeallist/", method = RequestMethod.POST)
     public BaseOutModel<AppealListOut> appeallist(@RequestBody AppealListInput input)
     {
+        Convert convert=new Convert();
         BaseOutModel baseOutModel = new BaseOutModel();
         List<Appeal> list = appealService.GetAppealListByOpenId(input.getOpenid(),input.getAppealtype());
 
@@ -178,45 +206,41 @@ public class AppealController
             AppealListOut out = new AppealListOut();
             if (onlinelist.size() > 0)
             {
-                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                List<AppealListInfoOut> infoOuts = new ArrayList<>();
                 for (Appeal item : onlinelist)
                 {
-                    AppealInfoOut appealInfoOut = new AppealInfoOut();
-                    appealInfoOut.setId(item.getId());
-                    appealInfoOut.setAmount1(item.getAmount1());
-                    appealInfoOut.setAmount2(item.getAmount2());
-                    appealInfoOut.setAmount3(item.getAmount3());
-                    appealInfoOut.setAppealtime(item.getAppealtime());
-                    appealInfoOut.setAppealresult(item.getAppealresult());
-                    appealInfoOut.setRechargetime1(item.getRechargetime1());
-                    appealInfoOut.setRechargetime2(item.getRechargetime2());
-                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    StudentRelation relation= studentRelationService.getStudetntRelationByID(item.getRelationid());
+                    Student student=studentService.GetStudentByID(relation.getStudentid());
+
+                    AppealListInfoOut appealInfoOut = new AppealListInfoOut();
+                    appealInfoOut.setAppealid(item.getId());
+                    appealInfoOut.setName(item.getStudentname());
+                    appealInfoOut.setAppwaltime(convert.DateToStr2(item.getAppealtime()));
+                    appealInfoOut.setUserbh(student.getUsrbh());
                     infoOuts.add(appealInfoOut);
                 }
                 out.setOnlinelist(infoOuts);
             }
             if (Calllist.size() > 0)
             {
-                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                List<AppealListInfoOut> infoOuts = new ArrayList<>();
                 for (Appeal item : Calllist)
                 {
-                    AppealInfoOut appealInfoOut = new AppealInfoOut();
-                    appealInfoOut.setId(item.getId());
-                    appealInfoOut.setAmount1(item.getAmount1());
-                    appealInfoOut.setAmount2(item.getAmount2());
-                    appealInfoOut.setAmount3(item.getAmount3());
-                    appealInfoOut.setAppealtime(item.getAppealtime());
-                    appealInfoOut.setAppealresult(item.getAppealresult());
-                    appealInfoOut.setRechargetime1(item.getRechargetime1());
-                    appealInfoOut.setRechargetime2(item.getRechargetime2());
-                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    StudentRelation relation= studentRelationService.getStudetntRelationByID(item.getRelationid());
+                    Student student=studentService.GetStudentByID(relation.getStudentid());
+
+                    AppealListInfoOut appealInfoOut = new AppealListInfoOut();
+                    appealInfoOut.setAppealid(item.getId());
+                    appealInfoOut.setName(item.getStudentname());
+                    appealInfoOut.setAppwaltime(convert.DateToStr2(item.getAppealtime()));
+                    appealInfoOut.setUserbh(student.getUsrbh());
                     infoOuts.add(appealInfoOut);
                 }
                 out.setCalllist(infoOuts);
             }
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
-            baseOutModel.setMessage("没有提交过申诉");
+            baseOutModel.setMessage("查询成功");
         }else
         {
             baseOutModel.setResult(1);
@@ -228,61 +252,95 @@ public class AppealController
     @RequestMapping(value = "/teacherappeallist/", method = RequestMethod.POST)
     public BaseOutModel<AppealListOut> teacherappeallist(@RequestBody TeacherAppealListInput input)
     {
+        Convert convert=new Convert();
         BaseOutModel baseOutModel = new BaseOutModel();
         //在线
-        List<Appeal> onlinelist = appealService.GetAppealListByStudentClass(input.getStudentclass(), 1);
+         List<Appeal> onlinelist = appealService.GetAppealListByStudentClass(input.getStudentclass(), 1);
         //电话
         List<Appeal> Calllist = appealService.GetAppealListByStudentClass(input.getStudentclass(), 2);
-        if (onlinelist.size() == 0 && Calllist.size() == 0)
+        if (onlinelist.size() != 0 || Calllist.size() != 0)
         {
 
             AppealListOut out = new AppealListOut();
             if (onlinelist.size() > 0)
             {
-                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                List<AppealListInfoOut> infoOuts = new ArrayList<>();
                 for (Appeal item : onlinelist)
                 {
-                    AppealInfoOut appealInfoOut = new AppealInfoOut();
-                    appealInfoOut.setId(item.getId());
-                    appealInfoOut.setAmount1(item.getAmount1());
-                    appealInfoOut.setAmount2(item.getAmount2());
-                    appealInfoOut.setAmount3(item.getAmount3());
-                    appealInfoOut.setAppealtime(item.getAppealtime());
-                    appealInfoOut.setAppealresult(item.getAppealresult());
-                    appealInfoOut.setRechargetime1(item.getRechargetime1());
-                    appealInfoOut.setRechargetime2(item.getRechargetime2());
-                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                   StudentRelation relation= studentRelationService.getStudetntRelationByID(item.getRelationid());
+                   Student student=studentService.GetStudentByID(relation.getStudentid());
+
+                    AppealListInfoOut appealInfoOut = new AppealListInfoOut();
+                    appealInfoOut.setAppealid(item.getId());
+                    appealInfoOut.setName(item.getStudentname());
+                    appealInfoOut.setAppwaltime(convert.DateToStr2(item.getAppealtime()));
+                    appealInfoOut.setUserbh(student.getUsrbh());
                     infoOuts.add(appealInfoOut);
                 }
                 out.setOnlinelist(infoOuts);
             }
             if (Calllist.size() > 0)
             {
-                List<AppealInfoOut> infoOuts = new ArrayList<>();
+                List<AppealListInfoOut> infoOuts = new ArrayList<>();
                 for (Appeal item : Calllist)
                 {
-                    AppealInfoOut appealInfoOut = new AppealInfoOut();
-                    appealInfoOut.setId(item.getId());
-                    appealInfoOut.setAmount1(item.getAmount1());
-                    appealInfoOut.setAmount2(item.getAmount2());
-                    appealInfoOut.setAmount3(item.getAmount3());
-                    appealInfoOut.setAppealtime(item.getAppealtime());
-                    appealInfoOut.setAppealresult(item.getAppealresult());
-                    appealInfoOut.setRechargetime1(item.getRechargetime1());
-                    appealInfoOut.setRechargetime2(item.getRechargetime2());
-                    appealInfoOut.setRechargetime3(item.getRechargetime3());
+                    StudentRelation relation= studentRelationService.getStudetntRelationByID(item.getRelationid());
+                    Student student=studentService.GetStudentByID(relation.getStudentid());
+
+                    AppealListInfoOut appealInfoOut = new AppealListInfoOut();
+                    appealInfoOut.setAppealid(item.getId());
+                    appealInfoOut.setName(item.getStudentname());
+                    appealInfoOut.setAppwaltime(convert.DateToStr2(item.getAppealtime()));
+                    appealInfoOut.setUserbh(student.getUsrbh());
                     infoOuts.add(appealInfoOut);
                 }
                 out.setCalllist(infoOuts);
             }
             baseOutModel.setData(out);
             baseOutModel.setResult(1);
-            baseOutModel.setMessage("没有提交过申诉");
+            baseOutModel.setMessage("查询成功");
         } else
         {
             baseOutModel.setResult(0);
             baseOutModel.setMessage("没有提交过申诉");
         }
         return baseOutModel;
+    }
+
+
+    @ApiOperation("审核详情")
+    @RequestMapping(value = "/getappealdetail/", method = RequestMethod.POST)
+    public  BaseOutModel<AppealInfoOut> getappealdetail(@RequestBody GetAppealDetailInput input )
+    {
+        Convert convert = new Convert();
+        BaseOutModel baseOutModel = new BaseOutModel();
+        Appeal item = appealService.GetAppealById(input.getAppealid());
+        if (item != null)
+        {
+            StudentRelation relation= studentRelationService.getStudetntRelationByID(item.getRelationid());
+            Student student=studentService.GetStudentByID(relation.getStudentid());
+
+            AppealInfoOut appealInfoOut = new AppealInfoOut();
+            appealInfoOut.setUserbh(student.getUsrbh());
+            appealInfoOut.setName(student.getName());
+            appealInfoOut.setAmount1(item.getAmount1());
+            appealInfoOut.setAmount2(item.getAmount2());
+            appealInfoOut.setAmount3(item.getAmount3());
+            appealInfoOut.setAppealtime(convert.DateToStr2(item.getAppealtime()));
+            appealInfoOut.setAppealresult(item.getAppealresult());
+            appealInfoOut.setRechargetime1(convert.DateToStr2(item.getRechargetime1()));
+            appealInfoOut.setRechargetime2(convert.DateToStr2(item.getRechargetime2()));
+            appealInfoOut.setRechargetime3(convert.DateToStr2(item.getRechargetime3()));
+            baseOutModel.setData(appealInfoOut);
+            baseOutModel.setResult(1);
+            baseOutModel.setMessage("查询成功");
+            return baseOutModel;
+        } else
+        {
+            baseOutModel.setResult(0);
+            baseOutModel.setMessage("未找到详情");
+            return baseOutModel;
+
+        }
     }
 }
