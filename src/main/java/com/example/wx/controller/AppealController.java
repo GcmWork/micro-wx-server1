@@ -137,21 +137,25 @@ public class AppealController
         List<Long> ids = new ArrayList<>();
         for (String item : Arr)
         {
-            ids.add(Long.valueOf(item));
+            if(!item.equals(""))
+            {
+                ids.add(Long.valueOf(item));
+            }
         }
 
         List<Appeal> appealList = appealService.GetAppealByIDs(ids);
         if (appealList.size() > 0)
         {
             boolean falg = true;
-            if (input.getAppealresult() .equals( "审核通过"))
-            {
+
                 for (Appeal appeal : appealList)
                 {
-
-                    StudentRelation ralation = studentRelationService.getStudetntRelationByID(appeal.getRelationid());
-                    ralation.setMobilephone(appeal.getNewmobilephone());
-                    falg = falg & studentRelationService.updateRelation(ralation) > 0;
+                    if (input.getAppealresult() .equals( "审核通过"))
+                    {
+                        StudentRelation ralation = studentRelationService.getStudetntRelationByID(appeal.getRelationid());
+                        ralation.setMobilephone(appeal.getNewmobilephone());
+                        falg = falg & studentRelationService.updateRelation(ralation) > 0;
+                    }
                     if (falg)
                     {
                         appeal.setAppealresult(input.getAppealresult());
@@ -176,11 +180,7 @@ public class AppealController
                     baseOutModel.setResult(1);
                 }
 
-            } else
-            {
-                baseOutModel.setMessage("操作成功");
-                baseOutModel.setResult(1);
-            }
+
         } else
         {
             baseOutModel.setMessage("未找到相应的申诉");

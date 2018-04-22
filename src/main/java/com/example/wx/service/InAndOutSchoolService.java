@@ -31,11 +31,11 @@ public class InAndOutSchoolService
         InAndOutSchoolExample.Criteria criteria = example.createCriteria();
         if (input.getStarttime() != "")
         {
-            criteria.andInouttimeLessThanOrEqualTo(convert.StrToDate(input.getStarttime()));
+            criteria.andInouttimeGreaterThanOrEqualTo(convert.StrToDate(input.getStarttime()));
         }
         if (input.getEndtime() != "")
         {
-            criteria.andInouttimeLessThanOrEqualTo(convert.StrToDate(input.getEndtime()));
+            criteria.andInouttimeLessThanOrEqualTo(convert.StrToDate(input.getEndtime()+" 23:59:59"));
         }
         criteria.andUserbhEqualTo(input.getUserbh()).andIsdelEqualTo(0);
         return  inAndOutSchoolMapper.selectByExample(example);

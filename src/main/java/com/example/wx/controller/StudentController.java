@@ -55,16 +55,16 @@ public class StudentController
             baseOutModel.setResult(1);
             return baseOutModel;
         }
-        //查找此学生已绑定几个手机号
-        long count1= studentRelationService.getCountByStudentid(student.getId());
-        if(count1>=3)
-        {
-            out.setReason("该学生已绑定3个手机号不可再绑定");
-            out.setCode("02");
-            baseOutModel.setData(out);
-            baseOutModel.setResult(0);
-            return baseOutModel;
-        }
+//        //查找此学生已绑定几个手机号
+//        long count1= studentRelationService.getCountByStudentid(student.getId());
+//        if(count1>=3)
+//        {
+//            out.setReason("该学生已绑定3个手机号不可再绑定");
+//            out.setCode("02");
+//            baseOutModel.setData(out);
+//            baseOutModel.setResult(0);
+//            return baseOutModel;
+//        }
         //查找微信号已绑定几个学生
         long count2= studentRelationService.getCountByOpenid(input.getOpenid());
         if(count2>=3)

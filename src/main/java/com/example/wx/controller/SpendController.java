@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class SpendController
         List<Spend> list= spendService.GetSpendList(input);
         if(list.size()>0)
         {
+            BigDecimal total=BigDecimal.valueOf(0);
             List<SpendInfoOut> infoOuts=new ArrayList<>();
             for (Spend item:list)
             {
@@ -49,8 +51,9 @@ public class SpendController
                 infoOut.setSpendtime(convert.DateToStr2(item.getSpendtime()));
                 infoOut.setBeforeamount(item.getBeforeamount());
                 infoOuts.add(infoOut);
+              total=  total.add(item.getAmount());
             }
-
+            listOut.setSpendtotalamount(total);
             listOut.setList(infoOuts);
             baseOutModel.setMessage("查询成功");
             baseOutModel.setResult(1);

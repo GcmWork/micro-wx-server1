@@ -44,33 +44,38 @@ public class RechargeController
     @RequestMapping(value = "/rechargemoney/",method = RequestMethod.POST)
     public BaseOutModel RechargeMoney(@RequestBody RechargeMoneyInput input)
     {
-        BaseOutModel baseOutModel=new BaseOutModel();
-       StudentRelation relation=studentRelationService.getStudetntRelationByID(input.getRelationid());
-       Student student= studentService.GetStudentByID(relation.getStudentid());
-        Recharge recharge=new Recharge();
-        recharge.setMobilephone(input.getMobilephone());
-        recharge.setRelationid(input.getRelationid());
-        recharge.setOpenid(input.getOpenid());
-        recharge.setParentname(relation.getParentname());
-        recharge.setStudentname(student.getName());
-        recharge.setRechargeamount(input.getRechargeamount());
-        recharge.setRechargedate(new Date());
-        recharge.setRechargestatus(input.getRechargestatus());
-        recharge.setUserbh(student.getUsrbh());
-        recharge.setAddfield(input.getAddfield());
+        BaseOutModel baseOutModel = new BaseOutModel();
+        Student student = studentService.GetStudentByUserbh(input.getUserbh(), "", "");
+        StudentRelation relation = studentRelationService.getRelationListByStudentidAndOpenid(input.getOpenid(), student.getId());
+        if (student != null && relation != null)
+        {
+            Recharge recharge = new Recharge();
+            recharge.setRelationid(relation.getId());
+            recharge.setOpenid(input.getOpenid());
+            recharge.setParentname(relation.getParentname());
+            recharge.setStudentname(student.getName());
+            recharge.setRechargeamount(input.getRechargeamount());
+            recharge.setRechargedate(new Date());
+            recharge.setRechargestatus(input.getRechargestatus());
+            recharge.setUserbh(student.getUsrbh());
 
-       if( rechargeService.InsertRecharge(recharge))
-       {
-           student.setBalance(student.getBalance().add(input.getRechargeamount()));
-           studentService.UpdateStudentByID(student);
-           baseOutModel.setResult(1);
-           baseOutModel.setMessage("充值成功");
-       }else
-       {
-           baseOutModel.setResult(0);
-           baseOutModel.setMessage("充值失败");
-       }
-        return  baseOutModel;
+            if (rechargeService.InsertRecharge(recharge))
+            {
+                student.setBalance(student.getBalance().add(input.getRechargeamount()));
+                studentService.UpdateStudentByID(student);
+                baseOutModel.setResult(1);
+                baseOutModel.setMessage("充值成功");
+            } else
+            {
+                baseOutModel.setResult(0);
+                baseOutModel.setMessage("充值失败");
+            }
+        } else
+        {
+            baseOutModel.setResult(0);
+            baseOutModel.setMessage("未找到相关学生信息");
+        }
+        return baseOutModel;
     }
     @ApiOperation("充值记录")
     @RequestMapping(value = "/getrechargelist/",method = RequestMethod.POST)

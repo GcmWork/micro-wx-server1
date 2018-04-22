@@ -1,6 +1,7 @@
 package com.example.wx.domain.OutModel;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 
 /**
  * Created by Administrator on 2018/3/26.
@@ -14,7 +15,8 @@ public class BiddingInfoOut
     public String usebh="";
     @ApiModelProperty("学生姓名")
     public String name="";
-
+    @ApiModelProperty("当前用户")
+    public Integer iscurrent=0;
 
     public String getName()
     {
@@ -44,5 +46,15 @@ public class BiddingInfoOut
     public void setStudentid(long studentid)
     {
         this.studentid = studentid;
+    }
+
+    public Integer getIscurrent()
+    {
+        return iscurrent;
+    }
+
+    public void setIscurrent(Integer iscurrent)
+    {
+        this.iscurrent = iscurrent;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.wx.domain.OutModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public class SpendListOut
 {
     public List<SpendInfoOut> list =new ArrayList<>();
+    public BigDecimal spendtotalamount=BigDecimal.valueOf(0);
 
     public List<SpendInfoOut> getList()
     {
@@ -18,5 +20,15 @@ public class SpendListOut
     public void setList(List<SpendInfoOut> list)
     {
         this.list = list;
+    }
+
+    public BigDecimal getSpendtotalamount()
+    {
+        return spendtotalamount;
+    }
+
+    public void setSpendtotalamount(BigDecimal spendtotalamount)
+    {
+        this.spendtotalamount = spendtotalamount;
     }
 }

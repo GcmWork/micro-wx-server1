@@ -10,28 +10,16 @@ import java.math.BigDecimal;
 public class RechargeMoneyInput
 {
 
-    @ApiModelProperty("电话")
-    private String mobilephone="";
+    @ApiModelProperty("学号")
+    private String userbh="";
     @ApiModelProperty("微信号")
     private String openid="";
     @ApiModelProperty("充值金额")
     private BigDecimal rechargeamount=BigDecimal.valueOf(0);
     @ApiModelProperty("充值状态 充值成功or充值失败")
     private String rechargestatus;
-    @ApiModelProperty("学生关系id")
-    private Long relationid;
-    @ApiModelProperty("备注")
-    private String addfield;
 
-    public String getMobilephone()
-    {
-        return mobilephone;
-    }
 
-    public void setMobilephone(String mobilephone)
-    {
-        this.mobilephone = mobilephone;
-    }
 
     public String getOpenid()
     {
@@ -53,26 +41,6 @@ public class RechargeMoneyInput
         this.rechargestatus = rechargestatus;
     }
 
-    public Long getRelationid()
-    {
-        return relationid;
-    }
-
-    public void setRelationid(Long relationid)
-    {
-        this.relationid = relationid;
-    }
-
-    public String getAddfield()
-    {
-        return addfield;
-    }
-
-    public void setAddfield(String addfield)
-    {
-        this.addfield = addfield;
-    }
-
     public BigDecimal getRechargeamount()
     {
         return rechargeamount;
@@ -81,5 +49,15 @@ public class RechargeMoneyInput
     public void setRechargeamount(BigDecimal rechargeamount)
     {
         this.rechargeamount = rechargeamount;
+    }
+
+    public String getUserbh()
+    {
+        return userbh;
+    }
+
+    public void setUserbh(String userbh)
+    {
+        this.userbh = userbh;
     }
 }

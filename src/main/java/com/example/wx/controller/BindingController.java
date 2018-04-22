@@ -134,6 +134,11 @@ public class BindingController
                 biddingInfoOut.setName(student.getName());
                 biddingInfoOut.setUsebh(student.getUsrbh());
                 biddingInfoOut.setStudentid(item.getStudentid());
+                if (biddingInfoOut.getStudentid()== input.getStudentid())
+                {
+                    biddingInfoOut.setIscurrent(1);
+
+                }
                 biddingListOut.add(biddingInfoOut);
             }
             baseOutModel.setResult(1);

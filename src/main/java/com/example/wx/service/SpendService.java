@@ -31,7 +31,7 @@ public class SpendService
         }
         if (input.getEndtime() != "")
         {
-            criteria.andSpendtimeLessThanOrEqualTo(convert.StrToDate(input.getEndtime()));
+            criteria.andSpendtimeLessThanOrEqualTo(convert.StrToDate(input.getEndtime()+" 23:59:59"));
         }
         criteria.andUserbhEqualTo(input.getUserbh()).andIsdelEqualTo(0);
         return  spendMapper.selectByExample(example);
